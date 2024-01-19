@@ -3,6 +3,7 @@ class_name SwordAbilityController
 
 @export var max_range := 150.0
 @export var sword_ability: PackedScene
+@export var damage := 5
 
 @onready var timer: Timer = $Timer
 
@@ -32,6 +33,16 @@ func on_timer_timeout() -> void:
 				other.global_position.distance_squared_to(player.global_position)
 			return this_distance < other_distance)
 
-	var sword_instance := sword_ability.instantiate() as Node2D
+	var closest_enemy: Node2D = enemies.front()
+
+	var sword_instance := sword_ability.instantiate() as SwordAbility
 	player.get_parent().add_child(sword_instance)
-	sword_instance.global_position = enemies.front().global_position
+	sword_instance.hitbox_component.damage = damage
+
+	sword_instance.global_position = \
+		closest_enemy.global_position \
+		+ Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4
+
+	var enemy_direction := \
+		closest_enemy.global_position - sword_instance.global_position
+	sword_instance.rotation = enemy_direction.angle()

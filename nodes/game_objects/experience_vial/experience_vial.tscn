@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds7r0pobx7efg"]
+
+[ext_resource type="Script" path="res://nodes/game_objects/experience_vial/experience_vial.gd" id="1_iylry"]
+[ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_qy0q8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_by01e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s65rh"]
+atlas = ExtResource("1_qy0q8")
+region = Rect2(136, 170, 16, 16)
+
+[node name="ExperienceVial" type="Node2D"]
+script = ExtResource("1_iylry")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_by01e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_s65rh")

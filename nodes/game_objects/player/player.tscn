@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bubpxinyfuupy"]
+[gd_scene load_steps=7 format=3 uid="uid://bubpxinyfuupy"]
 
-[ext_resource type="Script" path="res://nodes/player/player.gd" id="1_vmup1"]
+[ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj2v4"]
+radius = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfsrv"]
 atlas = ExtResource("1_ybm0y")
@@ -13,11 +16,21 @@ radius = 6.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
+motion_mode = 1
 script = ExtResource("1_vmup1")
 
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_x18iw")]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -5)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rj2v4")
+debug_color = Color(0, 1, 0.219608, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_hfsrv")

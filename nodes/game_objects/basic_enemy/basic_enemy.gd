@@ -1,10 +1,12 @@
 extends CharacterBody2D
 class_name BasicEnemy
 
-const MAX_SPEED = 75
+const MAX_SPEED = 40
+
+@onready var health_component: HealthComponent = $HealthComponent
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var direction := get_direction_to_player()
 	velocity = direction * MAX_SPEED
 	move_and_slide()

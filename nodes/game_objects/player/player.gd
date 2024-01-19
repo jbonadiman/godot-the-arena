@@ -1,14 +1,16 @@
 extends CharacterBody2D
 class_name Player
 
-const MAX_PLAYER = 200
+const MAX_PLAYER = 125
+const ACCELERATION_SMOOTHING = 25
 
 
 func _process(delta: float) -> void:
 	var movement_vector := get_movement_vector()
 	var direction := movement_vector.normalized()
 
-	velocity = direction * MAX_PLAYER
+	var target_velocity = direction * MAX_PLAYER
+	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 	move_and_slide()
 
 
