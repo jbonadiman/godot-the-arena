@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bubpxinyfuupy"]
+[gd_scene load_steps=8 format=3 uid="uid://bubpxinyfuupy"]
 
 [ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
+[ext_resource type="PackedScene" uid="uid://bgelb7oowkh40" path="res://nodes/abilities/sword_ability/sword_ability.tscn" id="3_mbydq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rj2v4"]
 radius = 32.0
@@ -22,6 +23,7 @@ script = ExtResource("1_vmup1")
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_x18iw")]
+sword_ability_scene = ExtResource("3_mbydq")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -5)

@@ -1,16 +1,25 @@
-[gd_scene format=3 uid="uid://cwur8rylrof43"]
+[gd_scene load_steps=2 format=3 uid="uid://cwur8rylrof43"]
+
+[ext_resource type="Script" path="res://nodes/ui/ability_upgrade_card.gd" id="1_oiff4"]
 
 [node name="AbilityUpgradeCard" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 150)
+mouse_default_cursor_shape = 2
+script = ExtResource("1_oiff4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "name"
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "description"
 autowrap_mode = 2
+
+[connection signal="gui_input" from="." to="." method="on_gui_input"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3nlm8rindck7"]
+[gd_scene load_steps=10 format=3 uid="uid://b3nlm8rindck7"]
 
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_in287"]
 [ext_resource type="Script" path="res://nodes/game_objects/basic_enemy/basic_enemy.gd" id="1_sajke"]
 [ext_resource type="Script" path="res://nodes/components/health_component.gd" id="2_kx6bl"]
 [ext_resource type="PackedScene" uid="uid://74vtlknhxw3h" path="res://nodes/components/vial_drop_component.tscn" id="3_tr28o"]
 [ext_resource type="PackedScene" uid="uid://dcc38qh03hdiq" path="res://nodes/components/hurt_box_component.tscn" id="4_eoml4"]
+[ext_resource type="PackedScene" uid="uid://ds7r0pobx7efg" path="res://nodes/game_objects/experience_vial/experience_vial.tscn" id="4_ojqok"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_225pd"]
 radius = 12.0
@@ -27,6 +28,7 @@ script = ExtResource("2_kx6bl")
 
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_tr28o")]
 health_component = NodePath("../HealthComponent")
+vial_scene = ExtResource("4_ojqok")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_eoml4")]
 health_component = NodePath("../HealthComponent")

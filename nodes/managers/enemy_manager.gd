@@ -1,7 +1,7 @@
 extends Node
 class_name EnemyManager
 
-@export var basic_enemy: PackedScene
+@export var basic_enemy_scene: PackedScene
 
 @onready var timer: Timer = $Timer
 @onready var spawn_radius: int
@@ -21,6 +21,6 @@ func on_timer_timeout() -> void:
 	var spawn_position := player.global_position + \
 		(random_direction * spawn_radius)
 
-	var enemy := basic_enemy.instantiate() as Node2D
+	var enemy := basic_enemy_scene.instantiate() as Node2D
 	get_parent().add_child(enemy)
 	enemy.global_position = spawn_position
