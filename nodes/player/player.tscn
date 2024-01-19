@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bubpxinyfuupy"]
+
+[ext_resource type="Script" path="res://nodes/player/player.gd" id="1_vmup1"]
+[ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
+[ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfsrv"]
+atlas = ExtResource("1_ybm0y")
+region = Rect2(17, 119, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjbth"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 0
+script = ExtResource("1_vmup1")
+
+[node name="AbilityManager" type="Node" parent="."]
+
+[node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_x18iw")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hfsrv")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_sjbth")
