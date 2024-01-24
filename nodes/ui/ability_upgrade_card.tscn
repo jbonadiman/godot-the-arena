@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://nodes/ui/ability_upgrade_card.gd" id="1_oiff4"]
 
 [node name="AbilityUpgradeCard" type="PanelContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(120, 150)
 mouse_default_cursor_shape = 2
 script = ExtResource("1_oiff4")
