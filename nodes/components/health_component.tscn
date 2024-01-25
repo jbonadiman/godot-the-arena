@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx0w2h1357hut"]
+[gd_scene load_steps=5 format=3 uid="uid://dx0w2h1357hut"]
 
 [ext_resource type="Script" path="res://nodes/components/health_component.gd" id="1_3joyy"]
+[ext_resource type="Script" path="res://nodes/components/styled_progress_bar.gd" id="2_rry04"]
 
-[node name="HealthComponent" type="Node"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j28m"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpswo"]
+bg_color = Color(0.145098, 0.584314, 0.415686, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[node name="HealthComponent" type="Node2D"]
 script = ExtResource("1_3joyy")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 6)
+offset_left = -16.0
+offset_top = -3.0
+offset_right = 16.0
+offset_bottom = 3.0
+pivot_offset = Vector2(16, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_6j28m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vpswo")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+script = ExtResource("2_rry04")
+
+[connection signal="changed" from="." to="." method="_on_changed"]

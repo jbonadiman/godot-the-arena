@@ -15,7 +15,9 @@ func _process(delta: float) -> void:
 
 
 func acquire_target() -> void:
-	var player_nodes = get_tree().get_nodes_in_group("player")
-	if player_nodes.size() > 0:
-		var player = player_nodes.front() as Node2D
-		target_position = player.global_position
+	var player := get_tree().get_first_node_in_group("player") as Player
+	if not player:
+		push_error("player not found")
+		return
+
+	target_position = player.global_position

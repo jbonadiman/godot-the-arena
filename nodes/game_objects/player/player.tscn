@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bubpxinyfuupy"]
+[gd_scene load_steps=10 format=3 uid="uid://bubpxinyfuupy"]
 
 [ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
 [ext_resource type="PackedScene" uid="uid://bgelb7oowkh40" path="res://nodes/abilities/sword_ability/sword_ability.tscn" id="3_mbydq"]
+[ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health_component.tscn" id="5_25fjk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rj2v4"]
 radius = 32.0
@@ -11,6 +12,9 @@ radius = 32.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfsrv"]
 atlas = ExtResource("1_ybm0y")
 region = Rect2(17, 119, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t5j7j"]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjbth"]
 radius = 6.0
@@ -20,17 +24,28 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_vmup1")
 
+[node name="HealthComponent" parent="." instance=ExtResource("5_25fjk")]
+unique_name_in_owner = true
+position = Vector2(0, -21)
+show_by_default = true
+
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_x18iw")]
 sword_ability_scene = ExtResource("3_mbydq")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
 shape = SubResource("CircleShape2D_rj2v4")
 debug_color = Color(0, 1, 0.219608, 0.419608)
 
@@ -38,6 +53,20 @@ debug_color = Color(0, 1, 0.219608, 0.419608)
 texture = SubResource("AtlasTexture_hfsrv")
 offset = Vector2(0, -8)
 
+[node name="CollisionArea2D" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+shape = SubResource("CircleShape2D_t5j7j")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_sjbth")
+
+[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="body_entered" from="CollisionArea2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="CollisionArea2D" to="." method="_on_body_exited"]

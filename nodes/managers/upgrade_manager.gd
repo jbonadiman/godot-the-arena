@@ -15,6 +15,7 @@ func _ready() -> void:
 func on_level_up(_new_level: int):
 	var chosen_upgrade := upgrade_pool.pick_random() as AbilityUpgrade
 	if not chosen_upgrade:
+		push_error("couldn't get chosen_upgrade")
 		return
 
 	var upgrade_screen_instance := \
