@@ -4,7 +4,7 @@ class_name StyledProgressBar
 
 const BORDER_COLOR := Color("3f2631")
 
-@onready var bar_color: Color#= Color("999999")
+@onready var bar_color: Color
 @onready var style_box := StyleBoxFlat.new()
 
 

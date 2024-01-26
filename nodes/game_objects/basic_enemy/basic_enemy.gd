@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name BasicEnemy
 
+@onready var health_component: HealthComponent = $HealthComponent
+
 const MAX_SPEED = 40
 
 

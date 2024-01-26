@@ -14,6 +14,7 @@ signal changed
 
 var current_health
 
+
 func _ready() -> void:
 	current_health = max_health
 	progress_bar.visible = show_by_default

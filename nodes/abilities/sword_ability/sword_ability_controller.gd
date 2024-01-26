@@ -70,4 +70,4 @@ func on_ability_upgrade_added(
 	timer.wait_time = base_wait_time * (1 - percent_reduction)
 	timer.start()
 
-	print("new sword time: %s" % timer.wait_time)
+	print("new sword attack interval: %.2fs" % timer.wait_time)
