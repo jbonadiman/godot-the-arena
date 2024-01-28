@@ -3,6 +3,7 @@ class_name EnemyManager
 
 @export var basic_enemy_scene: PackedScene
 @export var arena_time_manager: ArenaTimeManager
+@export var debug_draw: DebugDraw
 
 @onready var timer: Timer = $Timer
 
