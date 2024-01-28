@@ -1,4 +1,4 @@
-class_name AbilityUpgrade
+class_name Upgrade
 extends Resource
 
 @export var id: String

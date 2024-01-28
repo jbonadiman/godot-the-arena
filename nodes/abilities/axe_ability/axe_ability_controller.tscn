@@ -8,6 +8,5 @@ script = ExtResource("1_vb07r")
 axe_ability_scene = ExtResource("2_tclut")
 
 [node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 2.0
+wait_time = 3.0
 autostart = true

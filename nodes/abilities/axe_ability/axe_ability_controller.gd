@@ -3,20 +3,23 @@ class_name AxeAbilityController
 
 @export var axe_ability_scene: PackedScene
 
-@onready var timer: Timer = %Timer
+@onready var timer: Timer = $Timer
 
 var damage := 10
 var foreground_layer: Node2D
+var player: Player
 
 
 func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	foreground_layer = get_tree() \
 		.get_first_node_in_group("foreground_layer") as Node2D
+	player = get_tree().get_first_node_in_group("player") as Player
 
 
 func _on_timer_timeout() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player") as Player
+	print("axe wait time: %ss" % timer.wait_time)
+
 	if not player:
 		push_error("player not found")
 		return

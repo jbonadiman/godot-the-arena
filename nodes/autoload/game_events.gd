@@ -1,7 +1,7 @@
 extends Node
 
 signal experience_vial_collected(number: float)
-signal ability_upgrades_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary)
+signal ability_upgrades_added(upgrade: Upgrade, current_upgrades: Dictionary)
 
 
 func emit_experience_vial_collected(number: float) -> void:
@@ -9,7 +9,7 @@ func emit_experience_vial_collected(number: float) -> void:
 
 
 func emit_ability_upgrade_added(
-	upgrade: AbilityUpgrade,
+	upgrade: Upgrade,
 	current_upgrades: Dictionary) -> void:
 
 	ability_upgrades_added.emit(upgrade, current_upgrades)

@@ -59,7 +59,7 @@ func on_timer_timeout() -> void:
 
 
 func on_ability_upgrade_added(
-	upgrade: AbilityUpgrade,
+	upgrade: Upgrade,
 	current_upgrades: Dictionary) -> void:
 
 	if upgrade.id != "sword_rate":

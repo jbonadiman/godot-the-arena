@@ -7,5 +7,5 @@
 
 [node name="UpgradeManager" type="Node"]
 script = ExtResource("1_hprhx")
-upgrade_pool = Array[Resource("res://resources/upgrades/ability_upgrade.gd")]([ExtResource("2_to536"), ExtResource("3_nb2vi")])
+upgrade_pool = Array[Resource("res://resources/upgrades/upgrade.gd")]([ExtResource("2_to536"), ExtResource("3_nb2vi")])
 upgrade_screen_scene = ExtResource("2_xads8")

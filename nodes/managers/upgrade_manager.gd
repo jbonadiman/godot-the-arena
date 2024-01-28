@@ -1,7 +1,7 @@
 class_name UpgradeManager
 extends Node
 
-@export var upgrade_pool: Array[AbilityUpgrade]
+@export var upgrade_pool: Array[Upgrade]
 @export var experience_manager: ExperienceManager
 @export var upgrade_screen_scene: PackedScene
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 	experience_manager.level_up.connect(_on_level_up)
 
 
-func apply_upgrade(upgrade: AbilityUpgrade) -> void:
+func apply_upgrade(upgrade: Upgrade) -> void:
 	var has_upgrade := current_upgrades.has(upgrade.id)
 	if not has_upgrade:
 		current_upgrades[upgrade.id] = {
@@ -25,11 +25,11 @@ func apply_upgrade(upgrade: AbilityUpgrade) -> void:
 	GameEvents.emit_ability_upgrade_added(upgrade, current_upgrades)
 
 
-func pick_upgrades() -> Array[AbilityUpgrade]:
+func pick_upgrades() -> Array[Upgrade]:
 	var filtered_upgrades := upgrade_pool.duplicate()
-	var chosen_upgrades: Array[AbilityUpgrade] = []
+	var chosen_upgrades: Array[Upgrade] = []
 	for i in 2:
-		var chosen_upgrade := filtered_upgrades.pick_random() as AbilityUpgrade
+		var chosen_upgrade := filtered_upgrades.pick_random() as Upgrade
 		chosen_upgrades.append(chosen_upgrade)
 		filtered_upgrades = filtered_upgrades.filter(
 			func(upgrade):
@@ -38,7 +38,7 @@ func pick_upgrades() -> Array[AbilityUpgrade]:
 	return chosen_upgrades
 
 
-func on_upgrade_selected(upgrade: AbilityUpgrade) -> void:
+func on_upgrade_selected(upgrade: Upgrade) -> void:
 	apply_upgrade(upgrade)
 
 
