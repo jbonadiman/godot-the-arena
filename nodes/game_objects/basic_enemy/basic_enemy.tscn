@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3nlm8rindck7"]
+[gd_scene load_steps=13 format=3 uid="uid://b3nlm8rindck7"]
 
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_in287"]
 [ext_resource type="Script" path="res://nodes/game_objects/basic_enemy/basic_enemy.gd" id="1_sajke"]
 [ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health_component.tscn" id="2_ml6gr"]
 [ext_resource type="PackedScene" uid="uid://74vtlknhxw3h" path="res://nodes/components/vial_drop_component.tscn" id="3_tr28o"]
 [ext_resource type="PackedScene" uid="uid://dcc38qh03hdiq" path="res://nodes/components/hurt_box_component.tscn" id="4_eoml4"]
+[ext_resource type="PackedScene" uid="uid://c6fsj844u8s65" path="res://nodes/components/death_component.tscn" id="4_uqqxk"]
 
 [sub_resource type="Animation" id="Animation_3y8f6"]
 resource_name = "walk"
@@ -96,6 +97,10 @@ health_bar_color = Color(0.909804, 0.270588, 0.215686, 1)
 
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_tr28o")]
 health_component = NodePath("../HealthComponent")
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("4_uqqxk")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_eoml4")]
 health_component = NodePath("../HealthComponent")
