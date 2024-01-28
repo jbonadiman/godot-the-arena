@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dweobtlvlum45"]
+
+[ext_resource type="Script" path="res://nodes/abilities/axe_ability/axe_ability_controller.gd" id="1_vb07r"]
+[ext_resource type="PackedScene" uid="uid://bcurfrf7161on" path="res://nodes/abilities/axe_ability/axe_ability.tscn" id="2_tclut"]
+
+[node name="AxeAbilityController" type="Node"]
+script = ExtResource("1_vb07r")
+axe_ability_scene = ExtResource("2_tclut")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true

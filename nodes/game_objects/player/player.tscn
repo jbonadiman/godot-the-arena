@@ -29,9 +29,9 @@ unique_name_in_owner = true
 position = Vector2(0, -21)
 show_by_default = true
 
-[node name="AbilityManager" type="Node" parent="."]
+[node name="Abilities" type="Node" parent="."]
 
-[node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_x18iw")]
+[node name="SwordAbilityController" parent="Abilities" instance=ExtResource("2_x18iw")]
 sword_ability_scene = ExtResource("3_mbydq")
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]

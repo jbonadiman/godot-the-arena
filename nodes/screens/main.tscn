@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://iw2ll1tr6yoo"]
+[gd_scene load_steps=14 format=3 uid="uid://iw2ll1tr6yoo"]
 
 [ext_resource type="PackedScene" uid="uid://bubpxinyfuupy" path="res://nodes/game_objects/player/player.tscn" id="1_1j0we"]
 [ext_resource type="PackedScene" uid="uid://byb3ke2s2kety" path="res://nodes/ui/arena_time_ui.tscn" id="1_5gp56"]
@@ -11,8 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dwwdsgp4k6lc5" path="res://nodes/screens/end_screen.tscn" id="2_qisoa"]
 [ext_resource type="PackedScene" uid="uid://thsao1mgixpv" path="res://nodes/managers/experience_manager.tscn" id="3_ac8py"]
 [ext_resource type="PackedScene" uid="uid://b3nlm8rindck7" path="res://nodes/game_objects/basic_enemy/basic_enemy.tscn" id="4_68bie"]
-[ext_resource type="PackedScene" uid="uid://b1wvvjqnj3ybc" path="res://nodes/managers/upgrade_manager.tscn" id="7_0ogac"]
-[ext_resource type="PackedScene" uid="uid://bsccdj2ad85fx" path="res://nodes/ui/upgrade_screen.tscn" id="7_uqfs1"]
+[ext_resource type="PackedScene" uid="uid://tr13nheka2gu" path="res://nodes/managers/upgrade_manager.tscn" id="9_cwdby"]
 [ext_resource type="PackedScene" uid="uid://b8lowom4sgjpw" path="res://nodes/debug_draw/debug_draw.tscn" id="14_4f5ep"]
 
 [node name="Main" type="Node"]
@@ -35,9 +34,8 @@ basic_enemy_scene = ExtResource("4_68bie")
 arena_time_manager = NodePath("../ArenaTimeManager")
 debug_draw = NodePath("../DebugDraw")
 
-[node name="UpgradeManager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("7_0ogac")]
+[node name="UpgradeManager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("9_cwdby")]
 experience_manager = NodePath("../ExperienceManager")
-upgrade_screen_scene = ExtResource("7_uqfs1")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_igj2y")]
 

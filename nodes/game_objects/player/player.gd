@@ -1,13 +1,18 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var damage_interval_timer: Timer = %DamageIntervalTimer
+@onready var abilities = $Abilities
 
 const MAX_PLAYER = 125
 const ACCELERATION_SMOOTHING = 25
 
 var total_colliding_bodies := 0
+
+
+func _ready() -> void:
+	GameEvents.ability_upgrades_added.connect(_on_ability_upgrade_added)
 
 
 func _process(delta: float) -> void:
@@ -53,3 +58,12 @@ func _on_body_exited(_other_body: Node2D) -> void:
 
 func _on_damage_interval_timer_timeout() -> void:
 	check_deal_damage()
+
+
+func _on_ability_upgrade_added(
+	ability_upgrade: Ability, _current_upgrades: Dictionary) -> void:
+	if not ability_upgrade is Ability:
+		return
+
+	abilities.add_child(ability_upgrade.ability_controller_scene.instantiate())
+
