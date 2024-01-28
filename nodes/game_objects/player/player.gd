@@ -61,7 +61,7 @@ func _on_damage_interval_timer_timeout() -> void:
 
 
 func _on_ability_upgrade_added(
-	ability_upgrade: Ability, _current_upgrades: Dictionary) -> void:
+	ability_upgrade: Upgrade, _current_upgrades: Dictionary) -> void:
 	if not ability_upgrade is Ability:
 		return
 

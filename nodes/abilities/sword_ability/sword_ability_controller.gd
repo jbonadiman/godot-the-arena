@@ -15,7 +15,7 @@ var foreground_layer: Node2D
 
 func _ready() -> void:
 	timer.timeout.connect(on_timer_timeout)
-	GameEvents.ability_upgrades_added.connect(on_ability_upgrade_added)
+	GameEvents.ability_upgrades_added.connect(_on_ability_upgrade_added)
 	foreground_layer = get_tree() \
 		.get_first_node_in_group("foreground_layer") as Node2D
 
@@ -58,7 +58,7 @@ func on_timer_timeout() -> void:
 	sword_instance.rotation = enemy_direction.angle()
 
 
-func on_ability_upgrade_added(
+func _on_ability_upgrade_added(
 	upgrade: Upgrade,
 	current_upgrades: Dictionary) -> void:
 
