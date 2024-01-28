@@ -15,11 +15,11 @@ var entities_layer: Node2D
 func _ready() -> void:
 	base_spawn_time = timer.wait_time
 
-	#TODO: This needs better care. Even removing the 60 sum, enemies still spawn
-	# outside the arena.
+	#TODO: This needs better care. The arena needs a minimum size for this to
+	# work
 	spawn_radius = int(get_viewport() \
 		.get_visible_rect() \
-		.size.x / 2)
+		.size.x / 2) + 50
 
 	entities_layer = get_tree() \
 		.get_first_node_in_group("entities_layer")
@@ -78,5 +78,5 @@ func _on_enemy_death() -> void:
 func _on_arena_difficulty_increased(arena_difficulty: int):
 	var time_off := (0.1 / 12) * arena_difficulty
 	time_off = min(time_off, 0.7)
-	print("spawn time decrease: %.2fs" % time_off)
+	print("enemy spawn now at: %.2fs" % time_off)
 	timer.wait_time = base_spawn_time - time_off
