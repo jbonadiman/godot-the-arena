@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bboaowioo7mj4"]
+
+[ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_n4dyf"]
+[ext_resource type="Script" path="res://nodes/components/death/death_component.gd" id="2_nf67c"]
+[ext_resource type="Script" path="res://nodes/components/health/health_component.gd" id="2_q22ai"]
+[ext_resource type="Script" path="res://nodes/components/hurt_box/hurt_box_component.gd" id="4_ivmvj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyq1f"]
+atlas = ExtResource("1_n4dyf")
+region = Rect2(51, 153, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrs5"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vva70"]
+radius = 4.0
+
+[node name="WizardEnemy" type="CharacterBody2D"]
+collision_layer = 0
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_q22ai")
+max_health = 30.0
+health_bar_color = Color(0.909804, 0.270588, 0.215686, 1)
+
+[node name="DeathComponent" type="Node2D" parent="." node_paths=PackedStringArray("health_component", "sprite")]
+script = ExtResource("2_nf67c")
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_eyq1f")
+offset = Vector2(0, -8)
+
+[node name="HurtBoxComponent" type="Area2D" parent="."]
+script = ExtResource("4_ivmvj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_onrs5")
+debug_color = Color(1, 0.0156863, 0, 0.286275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_vva70")

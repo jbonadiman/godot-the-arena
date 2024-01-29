@@ -15,6 +15,7 @@ func _process(_delta: float) -> void:
 	var move_sign: int = sign(velocity.x)
 	visuals.scale.x = -move_sign if move_sign else 1
 
+
 func get_direction_to_player() -> Vector2:
 	var player := get_tree().get_first_node_in_group("player") as Player
 	if not player:

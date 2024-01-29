@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bgelb7oowkh40"]
 
-[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box_component.tscn" id="1_gctlf"]
+[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box/hit_box_component.tscn" id="1_gctlf"]
 [ext_resource type="Script" path="res://nodes/abilities/sword_ability/sword_ability.gd" id="1_kdqw6"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_suo3f"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_l1r6h"]
 [ext_resource type="Script" path="res://nodes/abilities/axe_ability/axe_ability.gd" id="1_q6rrk"]
-[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box_component.tscn" id="3_bpdpc"]
+[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box/hit_box_component.tscn" id="3_bpdpc"]
 
 [sub_resource type="Animation" id="Animation_2qix4"]
 length = 0.001

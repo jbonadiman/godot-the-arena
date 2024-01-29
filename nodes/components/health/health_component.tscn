@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dx0w2h1357hut"]
 
-[ext_resource type="Script" path="res://nodes/components/health_component.gd" id="1_3joyy"]
-[ext_resource type="Script" path="res://nodes/components/styled_progress_bar.gd" id="2_rry04"]
+[ext_resource type="Script" path="res://nodes/components/health/health_component.gd" id="1_3joyy"]
+[ext_resource type="Script" path="res://nodes/components/health/styled_progress_bar.gd" id="2_rry04"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j28m"]
 bg_color = Color(0.247059, 0.14902, 0.192157, 1)
