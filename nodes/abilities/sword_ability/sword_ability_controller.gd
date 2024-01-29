@@ -26,9 +26,9 @@ func on_timer_timeout() -> void:
 		push_error("player not found")
 		return
 
-	var enemies := get_tree().get_nodes_in_group("enemy") as Array[Node]
+	var enemies := get_tree().get_nodes_in_group("enemy") as Array
 	enemies = enemies.filter(
-		func(enemy: BasicEnemy):
+		func(enemy: Node2D):
 			return enemy.global_position \
 			.distance_squared_to(player.global_position) <= pow(max_range, 2))
 
@@ -36,14 +36,14 @@ func on_timer_timeout() -> void:
 		return
 
 	enemies.sort_custom(
-		func(this: BasicEnemy, other: BasicEnemy):
+		func(this: Node2D, other: Node2D):
 			var this_distance = \
 				this.global_position.distance_squared_to(player.global_position)
 			var other_distance = \
 				other.global_position.distance_squared_to(player.global_position)
 			return this_distance < other_distance)
 
-	var closest_enemy: BasicEnemy = enemies.front()
+	var closest_enemy: Node2D = enemies.front()
 
 	var sword_instance := sword_ability_scene.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)

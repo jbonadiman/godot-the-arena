@@ -1,9 +1,116 @@
-[gd_scene load_steps=8 format=3 uid="uid://bboaowioo7mj4"]
+[gd_scene load_steps=14 format=3 uid="uid://bboaowioo7mj4"]
 
+[ext_resource type="Script" path="res://nodes/game_objects/wizard_enemy/wizard_enemy.gd" id="1_8qa6v"]
+[ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health/health_component.tscn" id="1_a6p6t"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_n4dyf"]
-[ext_resource type="Script" path="res://nodes/components/death/death_component.gd" id="2_nf67c"]
-[ext_resource type="Script" path="res://nodes/components/health/health_component.gd" id="2_q22ai"]
-[ext_resource type="Script" path="res://nodes/components/hurt_box/hurt_box_component.gd" id="4_ivmvj"]
+[ext_resource type="Script" path="res://nodes/components/velocity/velocity_component.gd" id="3_3math"]
+[ext_resource type="PackedScene" uid="uid://74vtlknhxw3h" path="res://nodes/components/vial_drop/vial_drop_component.tscn" id="4_p0eg8"]
+[ext_resource type="PackedScene" uid="uid://c6fsj844u8s65" path="res://nodes/components/death/death_component.tscn" id="5_05i0j"]
+[ext_resource type="PackedScene" uid="uid://dcc38qh03hdiq" path="res://nodes/components/hurt_box/hurt_box_component.tscn" id="7_acbqq"]
+
+[sub_resource type="Animation" id="Animation_l5aag"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1.7411, 3.86374, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.261799]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Sprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 2.07053, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.5, 0.8), Vector2(0.9, 1.1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"_set_is_moving"
+}, {
+"args": [false],
+"method": &"_set_is_moving"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_h8lyk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2qx3"]
+_data = {
+"RESET": SubResource("Animation_h8lyk"),
+"walk": SubResource("Animation_l5aag")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyq1f"]
 atlas = ExtResource("1_n4dyf")
@@ -15,31 +122,50 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_vva70"]
 radius = 4.0
 
-[node name="WizardEnemy" type="CharacterBody2D"]
-collision_layer = 0
+[node name="WizardEnemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_8qa6v")
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("2_q22ai")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d2qx3")
+}
+autoplay = "walk"
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_a6p6t")]
+position = Vector2(0, 5)
 max_health = 30.0
-health_bar_color = Color(0.909804, 0.270588, 0.215686, 1)
+show_by_default = false
 
-[node name="DeathComponent" type="Node2D" parent="." node_paths=PackedStringArray("health_component", "sprite")]
-script = ExtResource("2_nf67c")
+[node name="VelocityComponent" type="Node" parent="."]
+script = ExtResource("3_3math")
+max_speed = 60
+acceleration = 20.0
+
+[node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_p0eg8")]
 health_component = NodePath("../HealthComponent")
-sprite = NodePath("../Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_05i0j")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = SubResource("AtlasTexture_eyq1f")
 offset = Vector2(0, -8)
 
-[node name="HurtBoxComponent" type="Area2D" parent="."]
-script = ExtResource("4_ivmvj")
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_acbqq")]
+visible = false
+health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_onrs5")
 debug_color = Color(1, 0.0156863, 0, 0.286275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_vva70")

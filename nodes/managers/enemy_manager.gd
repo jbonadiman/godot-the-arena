@@ -2,6 +2,7 @@ extends Node
 class_name EnemyManager
 
 @export var basic_enemy_scene: PackedScene
+@export var wizard_enemy_scene: PackedScene
 @export var arena_time_manager: ArenaTimeManager
 @export var debug_draw: DebugDraw
 
@@ -10,10 +11,13 @@ class_name EnemyManager
 var base_spawn_time := 0.0
 var spawn_radius: int
 var entities_layer: Node2D
+var enemy_table := WeightedTable.new()
 
 
 func _ready() -> void:
 	base_spawn_time = timer.wait_time
+
+	enemy_table.add_item(basic_enemy_scene, 10)
 
 	#TODO: This needs better care. The arena needs a minimum size for this to
 	# work
@@ -65,10 +69,12 @@ func _on_timer_timeout() -> void:
 		#push_error("player not found")
 		#return
 
-	var enemy := basic_enemy_scene.instantiate() as BasicEnemy
-	entities_layer.add_child(enemy)
-	enemy.health_component.died.connect(_on_enemy_death)
-	enemy.global_position = get_spawn_position()
+	var enemy_scene = enemy_table.pick_item()
+
+	var instance: Node2D = enemy_scene.instantiate()# as BasicEnemy
+	entities_layer.add_child(instance)
+	instance.health_component.died.connect(_on_enemy_death)
+	instance.global_position = get_spawn_position()
 
 
 func _on_enemy_death() -> void:
@@ -80,3 +86,6 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 	time_off = min(time_off, 0.7)
 	print("enemy spawn decreased by: %.2fs" % time_off)
 	timer.wait_time = base_spawn_time - time_off
+
+	if arena_difficulty == 6:
+		enemy_table.add_item(wizard_enemy_scene, 20)

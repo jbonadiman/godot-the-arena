@@ -8,7 +8,7 @@ signal changed
 
 @export var max_health: float = 10
 @export var show_by_default := false
-@export_color_no_alpha var health_bar_color := Color("25956a")
+@export_color_no_alpha var health_bar_color := Color("e84537")
 
 @onready var progress_bar: StyledProgressBar = %ProgressBar
 
@@ -25,7 +25,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
-		progress_bar.bar_color = health_bar_color
+		if progress_bar:
+			progress_bar.visible = show_by_default
+			progress_bar.bar_color = health_bar_color
 
 
 func damage(amount: float) -> void:

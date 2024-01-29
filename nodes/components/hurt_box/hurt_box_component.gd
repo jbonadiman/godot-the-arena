@@ -5,17 +5,17 @@ class_name  HurtBoxComponent
 
 
 func _ready() -> void:
-	area_entered.connect(on_area_entered)
+	area_entered.connect(_on_area_entered)
 
 
-func on_area_entered(other_area: Area2D) -> void:
+func _on_area_entered(other_area: Area2D) -> void:
 	if not health_component:
 		push_error("health_component not found")
 		return
 
-	var hitbox_component = other_area as HitBoxComponent
-	if not hitbox_component:
-		push_error("hitbox_component not found")
+	var hit_box = other_area as HitBoxComponent
+	if not hit_box:
+		push_error("hit_box not found")
 		return
 
-	health_component.damage(hitbox_component.damage)
+	health_component.damage(hit_box.damage)

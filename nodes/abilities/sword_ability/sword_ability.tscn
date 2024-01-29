@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bgelb7oowkh40"]
 
-[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box/hit_box_component.tscn" id="1_gctlf"]
 [ext_resource type="Script" path="res://nodes/abilities/sword_ability/sword_ability.gd" id="1_kdqw6"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_suo3f"]
+[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box/hit_box_component.tscn" id="2_jge36"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7n83"]
 size = Vector2(30, 30)
@@ -114,7 +114,7 @@ region = Rect2(136, 136, 16, 16)
 [node name="SwordAbility" type="Node2D"]
 script = ExtResource("1_kdqw6")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("1_gctlf")]
+[node name="HitBoxComponent" parent="." instance=ExtResource("2_jge36")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(15, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://iw2ll1tr6yoo"]
+[gd_scene load_steps=13 format=3 uid="uid://iw2ll1tr6yoo"]
 
 [ext_resource type="PackedScene" uid="uid://bubpxinyfuupy" path="res://nodes/game_objects/player/player.tscn" id="1_1j0we"]
 [ext_resource type="PackedScene" uid="uid://byb3ke2s2kety" path="res://nodes/ui/arena_time_ui.tscn" id="1_5gp56"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c8luetpb17r2a" path="res://nodes/managers/arena_time_manager.tscn" id="2_ohlh7"]
 [ext_resource type="PackedScene" uid="uid://dwwdsgp4k6lc5" path="res://nodes/screens/end_screen.tscn" id="2_qisoa"]
 [ext_resource type="PackedScene" uid="uid://thsao1mgixpv" path="res://nodes/managers/experience_manager.tscn" id="3_ac8py"]
-[ext_resource type="PackedScene" uid="uid://b3nlm8rindck7" path="res://nodes/game_objects/basic_enemy/basic_enemy.tscn" id="4_68bie"]
 [ext_resource type="PackedScene" uid="uid://tr13nheka2gu" path="res://nodes/managers/upgrade_manager.tscn" id="9_cwdby"]
 [ext_resource type="PackedScene" uid="uid://b8lowom4sgjpw" path="res://nodes/debug_draw/debug_draw.tscn" id="14_4f5ep"]
 
@@ -30,7 +29,6 @@ end_screen_scene = ExtResource("2_qisoa")
 [node name="ExperienceManager" parent="." instance=ExtResource("3_ac8py")]
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("arena_time_manager", "debug_draw") instance=ExtResource("1_oipmc")]
-basic_enemy_scene = ExtResource("4_68bie")
 arena_time_manager = NodePath("../ArenaTimeManager")
 debug_draw = NodePath("../DebugDraw")
 

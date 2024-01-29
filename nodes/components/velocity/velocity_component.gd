@@ -2,7 +2,7 @@ class_name VelocityComponent
 extends Node
 
 @export var max_speed: int = 40
-@export var acceleration: float = 5.0
+@export_range(0, 200, 0.01) var acceleration: float = 5.0
 
 var player: Player
 var velocity := Vector2.ZERO
@@ -39,3 +39,7 @@ func move(character_body: CharacterBody2D) -> void:
 	character_body.move_and_slide()
 
 	velocity = character_body.velocity
+
+
+func decelerate() -> void:
+	accelerate_towards(Vector2.ZERO)
