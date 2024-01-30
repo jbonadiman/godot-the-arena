@@ -1,5 +1,5 @@
-extends Control
 class_name DebugDraw
+extends Control
 
 const STROKE_WIDTH := 2.0
 
@@ -8,32 +8,7 @@ var shapes: Array[Geometry] = []
 
 func _draw() -> void:
 	for geometry: Geometry in shapes:
-		_draw_line(geometry as Line)
-		_draw_arrow(geometry as Arrow)
-
-
-func _draw_line(line: Line) -> void:
-	if not line:
-		return
-	draw_line(line.a, line.b, line.color, STROKE_WIDTH)
-
-
-func _draw_arrow(arrow: Arrow) -> void:
-	if not arrow:
-		return
-	draw_line(arrow.from, arrow.to, arrow.color, STROKE_WIDTH)
-
-	var first_point = arrow.to * 1.2
-
-	var points: PackedVector2Array = [
-		first_point,
-		first_point.rotated(deg_to_rad(165)),
-		first_point.rotated(deg_to_rad(200)),
-		#Vector2(arrow.to.x + 2.5, arrow.to.y),
-		#Vector2(arrow.to.x - 2.5, arrow.to.y),
-	]
-
-	draw_polygon(points, [arrow.color])
+		geometry._draw(self, STROKE_WIDTH)
 
 
 func _process(_delta) -> void:
@@ -49,9 +24,10 @@ func clear() -> void:
 
 
 class Geometry:
-	extends Control
-
 	var color: Color
+
+	func _draw(_control: Control, _stroke_width: float = 2.0) -> void:
+		assert(false, "_draw not implemented")
 
 
 class Line:
@@ -70,6 +46,10 @@ class Line:
 		b = point_b
 
 
+	func _draw(control: Control, stroke_width: float = 2.0) -> void:
+		control.draw_line(a, b, color, stroke_width)
+
+
 class Arrow:
 	extends Geometry
 
@@ -84,4 +64,19 @@ class Arrow:
 		color = _color
 		from = _from
 		to = _to
+
+	func _draw(control: Control, stroke_width: float = 2.0) -> void:
+		control.draw_line(from, to, color, stroke_width)
+		# TODO: draw triangle at the tip?
+		var first_point = to * 1.2
+
+		var points: PackedVector2Array = [
+			first_point,
+			first_point.rotated(deg_to_rad(165)),
+			first_point.rotated(deg_to_rad(200)),
+			#Vector2(arrow.to.x + 2.5, arrow.to.y),
+			#Vector2(arrow.to.x - 2.5, arrow.to.y),
+		]
+
+		control.draw_polygon(points, [color])
 

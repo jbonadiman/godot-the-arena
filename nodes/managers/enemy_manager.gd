@@ -19,6 +19,11 @@ func _ready() -> void:
 
 	enemy_table.add_item(basic_enemy_scene, 10)
 
+	debug_draw.push_geometry(DebugDraw.Line.new(
+		Vector2.ZERO,
+		Vector2(100, 200)
+	))
+
 	#TODO: This needs better care. The arena needs a minimum size for this to
 	# work
 	spawn_radius = int(get_viewport() \
@@ -63,11 +68,6 @@ func get_spawn_position() -> Vector2:
 
 func _on_timer_timeout() -> void:
 	timer.start()
-
-	#var player := get_tree().get_first_node_in_group("player") as Player
-	#if not player:
-		#push_error("player not found")
-		#return
 
 	var enemy_scene = enemy_table.pick_item()
 
