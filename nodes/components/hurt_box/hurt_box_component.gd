@@ -1,5 +1,5 @@
-extends Area2D
 class_name  HurtBoxComponent
+extends Area2D
 
 @export var health_component: HealthComponent
 
@@ -10,6 +10,7 @@ var foreground_layer: Node2D
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+
 
 func _on_area_entered(other_area: Area2D) -> void:
 	if not health_component:

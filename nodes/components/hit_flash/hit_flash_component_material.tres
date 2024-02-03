@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://m8fkhpcwbilm"]
+
+[ext_resource type="Shader" path="res://nodes/components/hit_flash/hit_flash.gdshader" id="1_ws2iq"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ws2iq")
+shader_parameter/lerp_percentage = 0.0

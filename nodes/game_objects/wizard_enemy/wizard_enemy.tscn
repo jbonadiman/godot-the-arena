@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bboaowioo7mj4"]
+[gd_scene load_steps=17 format=3 uid="uid://bboaowioo7mj4"]
 
 [ext_resource type="Script" path="res://nodes/game_objects/wizard_enemy/wizard_enemy.gd" id="1_8qa6v"]
 [ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health/health_component.tscn" id="1_a6p6t"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_n4dyf"]
 [ext_resource type="Script" path="res://nodes/components/velocity/velocity_component.gd" id="3_3math"]
+[ext_resource type="PackedScene" uid="uid://b72tj73fo50wn" path="res://nodes/components/hit_flash/hit_flash_component.tscn" id="3_imday"]
+[ext_resource type="Shader" path="res://nodes/components/hit_flash/hit_flash.gdshader" id="4_ljwb3"]
 [ext_resource type="PackedScene" uid="uid://74vtlknhxw3h" path="res://nodes/components/vial_drop/vial_drop_component.tscn" id="4_p0eg8"]
 [ext_resource type="PackedScene" uid="uid://c6fsj844u8s65" path="res://nodes/components/death/death_component.tscn" id="5_05i0j"]
 [ext_resource type="PackedScene" uid="uid://dcc38qh03hdiq" path="res://nodes/components/hurt_box/hurt_box_component.tscn" id="7_acbqq"]
@@ -112,6 +114,11 @@ _data = {
 "walk": SubResource("Animation_l5aag")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_do37p"]
+resource_local_to_scene = true
+shader = ExtResource("4_ljwb3")
+shader_parameter/lerp_percentage = 0.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyq1f"]
 atlas = ExtResource("1_n4dyf")
 region = Rect2(51, 153, 16, 16)
@@ -137,6 +144,11 @@ autoplay = "walk"
 position = Vector2(0, 5)
 max_health = 30.0
 show_by_default = false
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_imday")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_do37p")
 
 [node name="VelocityComponent" type="Node" parent="."]
 script = ExtResource("3_3math")
