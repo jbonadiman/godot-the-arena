@@ -3,13 +3,14 @@ class_name SwordAbilityController
 
 @export var max_range := 150.0
 @export var sword_ability_scene: PackedScene
-@export var damage := 5
+@export var base_damage := 5
 
 @onready var timer: Timer = $Timer
 @onready var base_wait_time := timer.wait_time
 
 const UPGRADE_PERCENTAGE := 0.1
 
+var additional_damage_percent := 1.0
 var foreground_layer: Node2D
 
 
@@ -47,7 +48,8 @@ func on_timer_timeout() -> void:
 
 	var sword_instance := sword_ability_scene.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)
-	sword_instance.hitbox_component.damage = damage
+	sword_instance.hitbox_component.damage = \
+		base_damage * additional_damage_percent
 
 	sword_instance.global_position = \
 		closest_enemy.global_position \
@@ -62,12 +64,19 @@ func _on_ability_upgrade_added(
 	upgrade: Upgrade,
 	current_upgrades: Dictionary) -> void:
 
-	if upgrade.id != "sword_rate":
-		return
+	match upgrade.id:
+		"sword_rate":
+			var percent_reduction = \
+			current_upgrades["sword_rate"]["quantity"] * UPGRADE_PERCENTAGE
+			timer.wait_time = base_wait_time * (1 - percent_reduction)
+			timer.start()
 
-	var percent_reduction = \
-		current_upgrades["sword_rate"]["quantity"] * UPGRADE_PERCENTAGE
-	timer.wait_time = base_wait_time * (1 - percent_reduction)
-	timer.start()
+			print("sword wait time: %.2fs" % timer.wait_time)
 
-	print("sword wait time: %.2fs" % timer.wait_time)
+		"sword_damage":
+			additional_damage_percent = \
+				1 + current_upgrades["sword_damage"]["quantity"] * 0.15
+			print("sword add damage: %.2f" % additional_damage_percent)
+
+
+

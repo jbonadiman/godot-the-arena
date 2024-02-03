@@ -33,4 +33,8 @@ func _on_area_entered(other_area: Area2D) -> void:
 
 	floating_text.global_position = \
 		global_position + (Vector2.UP * (floating_text.height / 2.0))
-	floating_text.initialize(str(hit_box.damage))
+
+	var format_string := \
+		"%.0f" if round(hit_box.damage) == hit_box.damage else "%.1f"
+
+	floating_text.initialize(format_string % hit_box.damage)

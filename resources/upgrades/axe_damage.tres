@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bnko0b1ypw0h0"]
+
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_gajin"]
+
+[resource]
+script = ExtResource("1_gajin")
+id = "axe_damage"
+max_quantity = 0
+name = "Axe Damage"
+description = "Increases axe damage by 10%"
