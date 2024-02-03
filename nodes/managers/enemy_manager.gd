@@ -19,11 +19,6 @@ func _ready() -> void:
 
 	enemy_table.add_item(basic_enemy_scene, 10)
 
-	debug_draw.push_geometry(DebugDraw.Line.new(
-		Vector2.ZERO,
-		Vector2(100, 200)
-	))
-
 	#TODO: This needs better care. The arena needs a minimum size for this to
 	# work
 	spawn_radius = int(get_viewport() \
