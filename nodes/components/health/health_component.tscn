@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dx0w2h1357hut"]
+[gd_scene load_steps=4 format=3 uid="uid://dx0w2h1357hut"]
 
 [ext_resource type="Script" path="res://nodes/components/health/health_component.gd" id="1_wsc3c"]
 [ext_resource type="Script" path="res://nodes/components/health/styled_progress_bar.gd" id="2_1daex"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j28m"]
-bg_color = Color(0.247059, 0.14902, 0.192157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwc4s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37efp"]
+bg_color = Color(0.909804, 0.270588, 0.215686, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -27,8 +25,7 @@ offset_bottom = 3.0
 pivot_offset = Vector2(16, 3)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_6j28m")
-theme_override_styles/fill = SubResource("StyleBoxFlat_lwc4s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_37efp")
 max_value = 1.0
 value = 1.0
 show_percentage = false
