@@ -1,11 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsccdj2ad85fx"]
+[gd_scene load_steps=7 format=3 uid="uid://bsccdj2ad85fx"]
 
 [ext_resource type="Script" path="res://nodes/ui/upgrade_screen.gd" id="1_j00fn"]
 [ext_resource type="PackedScene" uid="uid://cwur8rylrof43" path="res://nodes/ui/upgrade_card.tscn" id="2_yp6nh"]
 
+[sub_resource type="Animation" id="Animation_omulk"]
+resource_name = "in"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ms0d3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pd0wx"]
+resource_name = "out"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88wjl"]
+_data = {
+"RESET": SubResource("Animation_ms0d3"),
+"in": SubResource("Animation_omulk"),
+"out": SubResource("Animation_pd0wx")
+}
+
 [node name="UpgradeScreen" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_j00fn")
 upgrade_card_scene = ExtResource("2_yp6nh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_88wjl")
+}
+autoplay = "in"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.298039, 0.639216, 0.352941)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
