@@ -110,6 +110,7 @@ motion_mode = 1
 script = ExtResource("1_vmup1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_tm7a6")
 }
@@ -120,6 +121,7 @@ position = Vector2(0, -21)
 health_bar_color = Color(0.145098, 0.584314, 0.415686, 1)
 
 [node name="Abilities" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="SwordAbilityController" parent="Abilities" instance=ExtResource("2_x18iw")]
 
@@ -139,12 +141,14 @@ shape = SubResource("CircleShape2D_rj2v4")
 debug_color = Color(0, 1, 0.219608, 0.419608)
 
 [node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = SubResource("AtlasTexture_hfsrv")
 offset = Vector2(0, -8)
 
 [node name="CollisionArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2(0, -8)
 collision_layer = 0
@@ -157,7 +161,3 @@ shape = SubResource("CircleShape2D_t5j7j")
 visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_sjbth")
-
-[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
-[connection signal="body_entered" from="CollisionArea2D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="CollisionArea2D" to="." method="_on_body_exited"]

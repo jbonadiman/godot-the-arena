@@ -3,9 +3,10 @@ extends CharacterBody2D
 
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var damage_interval_timer: Timer = %DamageIntervalTimer
-@onready var abilities = $Abilities
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var visuals: Node2D = $Visuals
+@onready var abilities: Node = %Abilities
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var visuals: Node2D = %Visuals
+@onready var collision_area_2d: Area2D = %CollisionArea2D
 
 const MAX_PLAYER = 125
 const ACCELERATION_SMOOTHING = 25
@@ -15,6 +16,9 @@ var total_colliding_bodies := 0
 
 func _ready() -> void:
 	GameEvents.ability_upgrades_added.connect(_on_ability_upgrade_added)
+	damage_interval_timer.timeout.connect(_on_damage_interval_timer_timeout)
+	collision_area_2d.body_entered.connect(_on_body_entered)
+	collision_area_2d.body_exited.connect(_on_body_exited)
 
 
 func _process(delta: float) -> void:
@@ -74,4 +78,3 @@ func _on_ability_upgrade_added(
 		return
 
 	abilities.add_child(ability_upgrade.ability_controller_scene.instantiate())
-
