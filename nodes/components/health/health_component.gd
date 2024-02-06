@@ -1,7 +1,7 @@
 @tool
 
-extends Node2D
 class_name HealthComponent
+extends Node2D
 
 signal died
 signal changed
@@ -16,11 +16,13 @@ var current_health
 
 
 func _ready() -> void:
+	changed.connect(_on_changed)
+
 	current_health = max_health
 	progress_bar.visible = show_by_default
 	progress_bar.bar_color = health_bar_color
 
-	update_display()
+	_update_display()
 
 
 func _process(_delta: float) -> void:
@@ -39,11 +41,11 @@ func damage(amount: float) -> void:
 		Callable(die).call_deferred()
 
 
-func update_display() -> void:
-	progress_bar.value = get_health_percentage()
+func _update_display() -> void:
+	progress_bar.value = _get_health_percentage()
 
 
-func get_health_percentage() -> float:
+func _get_health_percentage() -> float:
 	return clampf(current_health / max_health, 0, 1)
 
 
@@ -53,4 +55,4 @@ func die() -> void:
 
 
 func _on_changed() -> void:
-	update_display()
+	_update_display()
