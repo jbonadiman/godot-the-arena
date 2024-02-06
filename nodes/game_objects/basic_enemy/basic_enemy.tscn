@@ -149,5 +149,4 @@ shape = SubResource("CircleShape2D_hsvc5")
 
 [node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("11_usq43")]
 unique_name_in_owner = true
-max_distance = 300.0
 streams = Array[AudioStream]([ExtResource("10_mo4ed"), ExtResource("12_xyitr"), ExtResource("13_6c11n"), ExtResource("14_rcg0o"), ExtResource("15_vn70n")])

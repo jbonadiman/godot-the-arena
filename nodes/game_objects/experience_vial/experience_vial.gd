@@ -1,9 +1,11 @@
-extends Node2D
 class_name ExperienceVial
+extends Node2D
 
-@onready var area_2d: Area2D = $Area2D
-@onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var area_2d: Area2D = %Area2D
+@onready var collision_shape: CollisionShape2D = %CollisionShape2D
+@onready var sprite: Sprite2D = %Sprite2D
+@onready var audio_player: RandomStreamPlayer2DComponent = \
+	%RandomStreamPlayer2DComponent
 
 var player: Player
 
@@ -14,6 +16,9 @@ func _ready() -> void:
 
 
 func _collect() -> void:
+	audio_player.play_random()
+	await audio_player.finished
+
 	GameEvents.emit_experience_vial_collected(1)
 	queue_free()
 

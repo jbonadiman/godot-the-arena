@@ -1,10 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bubpxinyfuupy"]
+[gd_scene load_steps=19 format=3 uid="uid://bubpxinyfuupy"]
 
 [ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://dcsfwqpi0ufvk" path="res://nodes/components/velocity/velocity_component.tscn" id="2_achqi"]
 [ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
+[ext_resource type="PackedScene" uid="uid://ba4l57nbeg4w8" path="res://nodes/components/random_stream_player/random_stream_player_2d_component.tscn" id="5_5xkw2"]
 [ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health/health_component.tscn" id="5_25fjk"]
+[ext_resource type="AudioStream" uid="uid://dbrji1xgpbokr" path="res://assets/audio/impactMining_000.ogg" id="6_l20v6"]
+[ext_resource type="AudioStream" uid="uid://c0e04v12ue40x" path="res://assets/audio/impactMining_001.ogg" id="7_srh22"]
+[ext_resource type="AudioStream" uid="uid://gogimh1axoa4" path="res://assets/audio/impactMining_002.ogg" id="8_f0l6a"]
+[ext_resource type="AudioStream" uid="uid://seru1trdkw5k" path="res://assets/audio/impactMining_003.ogg" id="9_0eept"]
+[ext_resource type="AudioStream" uid="uid://c6ym6hxikua8d" path="res://assets/audio/impactMining_004.ogg" id="10_wt01i"]
 
 [sub_resource type="Animation" id="Animation_epagx"]
 length = 0.001
@@ -135,6 +141,10 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("5_5xkw2")]
+unique_name_in_owner = true
+streams = Array[AudioStream]([ExtResource("6_l20v6"), ExtResource("7_srh22"), ExtResource("8_f0l6a"), ExtResource("9_0eept"), ExtResource("10_wt01i")])
 
 [node name="PickupArea2D" type="Area2D" parent="."]
 visible = false

@@ -172,7 +172,6 @@ sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("8_y5sku")]
 unique_name_in_owner = true
-max_distance = 300.0
 streams = Array[AudioStream]([ExtResource("9_70yew"), ExtResource("10_g2qpq"), ExtResource("11_tyeve"), ExtResource("12_i6iel"), ExtResource("13_oihmx")])
 
 [node name="Visuals" type="Node2D" parent="."]

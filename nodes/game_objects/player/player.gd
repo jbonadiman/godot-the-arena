@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var visuals: Node2D = %Visuals
 @onready var collision_area_2d: Area2D = %CollisionArea2D
+@onready var audio_player: RandomStreamPlayer2DComponent = \
+	%HitRandomAudioPlayerComponent
 
 var total_colliding_bodies := 0
 var base_speed := 0.0
@@ -60,6 +62,7 @@ func check_deal_damage() -> void:
 
 	health_component.damage(1)
 	GameEvents.emit_player_damaged()
+	audio_player.play_random()
 	damage_interval_timer.start()
 
 
