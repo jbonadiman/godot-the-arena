@@ -18,7 +18,10 @@ func _ready() -> void:
 
 
 func play_jingle(is_defeat := false) -> void:
-		%DefeatStreamPlayer.play() if is_defeat else %VictoryStreamPlayer.play()
+	if is_defeat:
+		%DefeatStreamPlayer.play()
+	else:
+		%VictoryStreamPlayer.play()
 
 
 

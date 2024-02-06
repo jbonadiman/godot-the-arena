@@ -209,7 +209,7 @@ mouse_default_cursor_shape = 2
 script = ExtResource("1_m74fs")
 
 [node name="HoverPlayerComponent" parent="." instance=ExtResource("2_opgp7")]
-volume_db = -8.0
+volume_db = -20.0
 streams = Array[AudioStream]([ExtResource("3_ju2gp"), ExtResource("4_jgb2e"), ExtResource("5_jq080"), ExtResource("6_vrty6"), ExtResource("7_m336x"), ExtResource("8_jaqbs"), ExtResource("9_4s7nf"), ExtResource("10_lig25"), ExtResource("11_5r2m4"), ExtResource("12_py5gh")])
 
 [node name="PressPlayerComponent" parent="." instance=ExtResource("2_opgp7")]
