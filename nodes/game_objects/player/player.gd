@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var visuals: Node2D = %Visuals
 @onready var collision_area_2d: Area2D = %CollisionArea2D
-@onready var audio_player: RandomStreamPlayer2DComponent = \
+@onready var audio_player: RandomStreamPlayer2DComponent= \
 	%HitRandomAudioPlayerComponent
 
 var total_colliding_bodies := 0

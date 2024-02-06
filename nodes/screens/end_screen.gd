@@ -10,9 +10,9 @@ func _ready() -> void:
 	panel_container.pivot_offset = panel_container.size / 2
 
 	var tween := create_tween()
-	tween.tween_property(panel_container, "scale", Vector2.ONE, 0.3)
 	tween.tween_property(panel_container, "scale", Vector2.ZERO, 0) \
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(panel_container, "scale", Vector2.ONE, 0.3)
 
 	get_tree().paused = true
 
