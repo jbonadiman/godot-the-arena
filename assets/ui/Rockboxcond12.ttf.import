@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cxxmsggxwuc8i"
-path="res://.godot/imported/Rockboxcond12.ttf-026d99dba7b731f91410837a01ee05b3.fontdata"
+path="res://.godot/imported/Rockboxcond12.ttf-10d841b75b75e62d52a83145d763e255.fontdata"
 
 [deps]
 
-source_file="res://assets/Rockboxcond12.ttf"
-dest_files=["res://.godot/imported/Rockboxcond12.ttf-026d99dba7b731f91410837a01ee05b3.fontdata"]
+source_file="res://assets/ui/Rockboxcond12.ttf"
+dest_files=["res://.godot/imported/Rockboxcond12.ttf-10d841b75b75e62d52a83145d763e255.fontdata"]
 
 [params]
 
