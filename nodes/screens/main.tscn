@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://iw2ll1tr6yoo"]
+[gd_scene load_steps=14 format=3 uid="uid://iw2ll1tr6yoo"]
 
 [ext_resource type="PackedScene" uid="uid://bubpxinyfuupy" path="res://nodes/game_objects/player/player.tscn" id="1_1j0we"]
 [ext_resource type="PackedScene" uid="uid://byb3ke2s2kety" path="res://nodes/ui/arena_time_ui.tscn" id="1_5gp56"]
@@ -11,11 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://dwwdsgp4k6lc5" path="res://nodes/screens/end_screen.tscn" id="2_qisoa"]
 [ext_resource type="PackedScene" uid="uid://thsao1mgixpv" path="res://nodes/managers/experience_manager.tscn" id="3_ac8py"]
 [ext_resource type="PackedScene" uid="uid://tr13nheka2gu" path="res://nodes/managers/upgrade_manager.tscn" id="9_cwdby"]
+[ext_resource type="PackedScene" uid="uid://c4vw441qj8su5" path="res://nodes/ui/vignette.tscn" id="12_cgds2"]
 [ext_resource type="PackedScene" uid="uid://b8lowom4sgjpw" path="res://nodes/debug_draw/debug_draw.tscn" id="14_4f5ep"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rs4wp")
 end_screen_scene = ExtResource("2_qisoa")
+
+[node name="Vignette" parent="." instance=ExtResource("12_cgds2")]
 
 [node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("1_5gp56")]
 arena_time_manager = NodePath("../ArenaTimeManager")
