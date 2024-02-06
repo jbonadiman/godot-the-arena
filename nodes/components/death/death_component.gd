@@ -4,8 +4,10 @@ extends Node2D
 @export var health_component: HealthComponent
 @export var sprite: Sprite2D
 
-@onready var particles_2d: GPUParticles2D = $GPUParticles2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var particles_2d: GPUParticles2D = %GPUParticles2D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var audio_player: RandomStreamPlayer2DComponent = \
+	%HitRandomAudioPlayerComponent
 
 var entities_layer: Node2D
 
@@ -28,3 +30,4 @@ func _on_died() -> void:
 	entities_layer.add_child(self)
 	global_position = spawn_position
 	animation_player.play("default")
+	audio_player.play_random()

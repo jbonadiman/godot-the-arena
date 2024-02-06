@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3nlm8rindck7"]
+[gd_scene load_steps=23 format=3 uid="uid://b3nlm8rindck7"]
 
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_in287"]
 [ext_resource type="Script" path="res://nodes/game_objects/basic_enemy/basic_enemy.gd" id="1_sajke"]
@@ -6,8 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://dcsfwqpi0ufvk" path="res://nodes/components/velocity/velocity_component.tscn" id="3_5cbia"]
 [ext_resource type="PackedScene" uid="uid://74vtlknhxw3h" path="res://nodes/components/vial_drop/vial_drop_component.tscn" id="3_a6jqm"]
 [ext_resource type="PackedScene" uid="uid://b72tj73fo50wn" path="res://nodes/components/hit_flash/hit_flash_component.tscn" id="3_k7q1y"]
+[ext_resource type="Shader" path="res://nodes/components/hit_flash/hit_flash.gdshader" id="4_4nlsj"]
 [ext_resource type="PackedScene" uid="uid://c6fsj844u8s65" path="res://nodes/components/death/death_component.tscn" id="4_t3up4"]
 [ext_resource type="PackedScene" uid="uid://dcc38qh03hdiq" path="res://nodes/components/hurt_box/hurt_box_component.tscn" id="5_eaxe1"]
+[ext_resource type="AudioStream" uid="uid://bawuwohnbixp7" path="res://assets/audio/footstep_carpet_000.ogg" id="10_mo4ed"]
+[ext_resource type="PackedScene" uid="uid://ba4l57nbeg4w8" path="res://nodes/components/random_stream_player/random_stream_player_2d_component.tscn" id="11_usq43"]
+[ext_resource type="AudioStream" uid="uid://1mc4tgtpgc5f" path="res://assets/audio/footstep_carpet_001.ogg" id="12_xyitr"]
+[ext_resource type="AudioStream" uid="uid://dw8k1vkt7p7r" path="res://assets/audio/footstep_carpet_002.ogg" id="13_6c11n"]
+[ext_resource type="AudioStream" uid="uid://qlynu0wn7yah" path="res://assets/audio/footstep_carpet_003.ogg" id="14_rcg0o"]
+[ext_resource type="AudioStream" uid="uid://boxyw4orgvkjd" path="res://assets/audio/footstep_carpet_004.ogg" id="15_vn70n"]
 
 [sub_resource type="Animation" id="Animation_5amvq"]
 length = 0.001
@@ -71,6 +78,11 @@ _data = {
 "walk": SubResource("Animation_3y8f6")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6crl7"]
+resource_local_to_scene = true
+shader = ExtResource("4_4nlsj")
+shader_parameter/lerp_percentage = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_225pd"]
 radius = 12.0
 
@@ -94,13 +106,16 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_xwfma")]
+unique_name_in_owner = true
 position = Vector2(0, 9)
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_k7q1y")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_6crl7")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_5cbia")]
+unique_name_in_owner = true
 
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_a6jqm")]
 drop_percent = 0.35
@@ -111,6 +126,8 @@ health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_eaxe1")]
+unique_name_in_owner = true
+visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
@@ -119,11 +136,18 @@ shape = SubResource("CircleShape2D_225pd")
 debug_color = Color(1, 0, 0.14902, 0.419608)
 
 [node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = SubResource("AtlasTexture_swdm8")
 offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_hsvc5")
+
+[node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("11_usq43")]
+unique_name_in_owner = true
+max_distance = 300.0
+streams = Array[AudioStream]([ExtResource("10_mo4ed"), ExtResource("12_xyitr"), ExtResource("13_6c11n"), ExtResource("14_rcg0o"), ExtResource("15_vn70n")])
