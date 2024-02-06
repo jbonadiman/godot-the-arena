@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _on_died() -> void:
 	if not owner or not owner is Node2D:
+		# FIXME: some racing codition make this if get triggered
 		push_error("owner is null or not Node2D")
 		return
 
