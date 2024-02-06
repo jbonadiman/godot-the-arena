@@ -2,32 +2,32 @@ class_name Player
 extends CharacterBody2D
 
 @onready var health_component: HealthComponent = %HealthComponent
+@onready var velocity_component: VelocityComponent = %VelocityComponent
 @onready var damage_interval_timer: Timer = %DamageIntervalTimer
 @onready var abilities: Node = %Abilities
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var visuals: Node2D = %Visuals
 @onready var collision_area_2d: Area2D = %CollisionArea2D
 
-const MAX_PLAYER = 125
-const ACCELERATION_SMOOTHING = 25
-
 var total_colliding_bodies := 0
+var base_speed := 0.0
 
 
 func _ready() -> void:
+	base_speed = velocity_component.max_speed
+
 	GameEvents.ability_upgrades_added.connect(_on_ability_upgrade_added)
 	damage_interval_timer.timeout.connect(_on_damage_interval_timer_timeout)
 	collision_area_2d.body_entered.connect(_on_body_entered)
 	collision_area_2d.body_exited.connect(_on_body_exited)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var movement_vector := get_movement_vector()
 	var direction := movement_vector.normalized()
 
-	var target_velocity = direction * MAX_PLAYER
-	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
-	move_and_slide()
+	velocity_component.accelerate_towards(direction)
+	velocity_component.move(self)
 
 	if movement_vector.x or movement_vector.y:
 		animation_player.play("walk")
@@ -76,8 +76,13 @@ func _on_damage_interval_timer_timeout() -> void:
 
 
 func _on_ability_upgrade_added(
-	ability_upgrade: Upgrade, _current_upgrades: Dictionary) -> void:
-	if not ability_upgrade is Ability:
-		return
+	upgrade: Upgrade, current_upgrades: Dictionary) -> void:
+	match upgrade:
+		var new_ability when upgrade is Ability:
+			abilities.add_child(new_ability.ability_controller_scene.instantiate())
+			print("player got new ability: %s" % new_ability.name)
 
-	abilities.add_child(ability_upgrade.ability_controller_scene.instantiate())
+		_ when upgrade.id == "player_speed":
+			velocity_component.max_speed = base_speed + \
+				(base_speed * current_upgrades["player_speed"]["quantity"] * 0.1)
+			print("player new max speed: %.2f" % velocity_component.max_speed)
