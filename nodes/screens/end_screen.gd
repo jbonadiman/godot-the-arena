@@ -16,7 +16,7 @@ func _ready() -> void:
 
 	var tween := create_tween()
 	tween.tween_property(panel_container, "scale", Vector2.ZERO, 0) \
-	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(panel_container, "scale", Vector2.ONE, 0.3)
 
 	get_tree().paused = true
@@ -27,7 +27,6 @@ func play_jingle(is_defeat := false) -> void:
 		%DefeatStreamPlayer.play()
 	else:
 		%VictoryStreamPlayer.play()
-
 
 
 func set_defeat() -> void:
