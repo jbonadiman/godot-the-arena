@@ -4,9 +4,14 @@ extends CanvasLayer
 @onready var panel_container: PanelContainer = %PanelContainer
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %DescriptionLabel
+@onready var restart_button: SoundButton = %RestartButton
+@onready var quit_button: SoundButton = %QuitButton
 
 
 func _ready() -> void:
+	restart_button.pressed.connect(_on_restart_button_pressed)
+	quit_button.pressed.connect(_on_quit_button_pressed)
+
 	panel_container.pivot_offset = panel_container.size / 2
 
 	var tween := create_tween()
