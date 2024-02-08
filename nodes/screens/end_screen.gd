@@ -9,6 +9,8 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	MetaProgression.save()
+
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 

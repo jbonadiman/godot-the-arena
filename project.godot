@@ -12,6 +12,8 @@ config_version=5
 
 config/name="tiny-vampire-survivors"
 run/main_scene="res://nodes/ui/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="tiny-vampire-survivors"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +22,7 @@ config/icon="res://icon.svg"
 GameEvents="*res://nodes/autoload/game_events.tscn"
 MusicPlayer="*res://nodes/autoload/music_player.tscn"
 ScreenTransition="*res://nodes/autoload/screen_transition.tscn"
+MetaProgression="*res://nodes/autoload/meta_progression.tscn"
 
 [display]
 
