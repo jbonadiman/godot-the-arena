@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c4vw441qj8su5" path="res://nodes/ui/vignette.tscn" id="3_wmv6f"]
 
 [node name="MainMenu" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_7g1mm")
 
 [node name="TileMap" type="TileMap" parent="."]
