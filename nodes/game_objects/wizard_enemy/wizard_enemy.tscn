@@ -149,7 +149,7 @@ autoplay = "walk"
 [node name="HealthComponent" parent="." instance=ExtResource("1_a6p6t")]
 unique_name_in_owner = true
 position = Vector2(0, 5)
-max_health = 30.0
+max_health = 20.0
 show_by_default = false
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_imday")]

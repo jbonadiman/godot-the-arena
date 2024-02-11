@@ -16,7 +16,6 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rs4wp")
-end_screen_scene = ExtResource("2_qisoa")
 
 [node name="Vignette" parent="." instance=ExtResource("12_cgds2")]
 

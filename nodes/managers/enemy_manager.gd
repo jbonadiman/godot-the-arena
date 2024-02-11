@@ -1,12 +1,14 @@
 class_name EnemyManager
 extends Node
 
-@export var basic_enemy_scene: PackedScene
-@export var wizard_enemy_scene: PackedScene
 @export var arena_time_manager: ArenaTimeManager
 @export var debug_draw: DebugDraw
 
 @onready var timer: Timer = $Timer
+
+var basic_enemy_scene := preload("res://nodes/game_objects/basic_enemy/basic_enemy.tscn")
+var wizard_enemy_scene := preload("res://nodes/game_objects/wizard_enemy/wizard_enemy.tscn")
+var bat_enemy_scene := preload("res://nodes/game_objects/bat_enemy/bat_enemy.tscn")
 
 var base_spawn_time := 0.0
 var spawn_radius: int
@@ -70,12 +72,7 @@ func _on_timer_timeout() -> void:
 
 	var instance: Node2D = enemy_scene.instantiate()# as BasicEnemy
 	entities_layer.add_child(instance)
-	instance.health_component.died.connect(_on_enemy_death)
 	instance.global_position = get_spawn_position()
-
-
-func _on_enemy_death() -> void:
-	pass
 
 
 func _on_arena_difficulty_increased(arena_difficulty: int):
@@ -84,5 +81,8 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 	print("enemy spawn decreased by: %.2fs" % time_off)
 	timer.wait_time = base_spawn_time - time_off
 
-	if arena_difficulty == 6:
-		enemy_table.add_item(wizard_enemy_scene, 20)
+	match arena_difficulty:
+		6:
+			enemy_table.add_item(wizard_enemy_scene, 15)
+		18:
+			enemy_table.add_item(bat_enemy_scene, 8)
