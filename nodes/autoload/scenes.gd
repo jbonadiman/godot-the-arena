@@ -20,4 +20,5 @@ var bat_enemy := preload("uid://by1oqhvo27bd3")
 # region Abilities
 var sword_ability := preload("uid://bgelb7oowkh40")
 var axe_ability := preload("uid://bcurfrf7161on")
+var anvil_ability := preload("uid://1wcnqiyg05xc")
 # endregion

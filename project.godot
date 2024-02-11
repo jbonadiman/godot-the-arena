@@ -29,6 +29,7 @@ MusicPlayer="*res://nodes/autoload/music_player.tscn"
 ScreenTransition="*res://nodes/autoload/screen_transition.tscn"
 MetaProgression="*res://nodes/autoload/meta_progression.tscn"
 Scenes="*res://nodes/autoload/scenes.gd"
+Spawner="*res://nodes/autoload/spawner.gd"
 
 [display]
 
