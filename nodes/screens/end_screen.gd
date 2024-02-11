@@ -39,11 +39,7 @@ func set_defeat() -> void:
 
 func _on_continue_button_pressed() -> void:
 	Screens.transition_to_scene(Screens.upgrades_menu_scene)
-	await Screens.transitioned_halfway
-	get_tree().paused = false
 
 
 func _on_quit_button_pressed() -> void:
 	Screens.transition_to_scene(Screens.main_menu_scene)
-	await Screens.transitioned_halfway
-	get_tree().paused = false

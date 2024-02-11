@@ -20,6 +20,8 @@ var main_scene = preload("res://nodes/screens/main.tscn")
 func transition_to_scene(scene: PackedScene) -> void:
 	transition()
 	await transitioned_halfway
+
+	get_tree().paused = false
 	get_tree().change_scene_to_packed(scene)
 
 

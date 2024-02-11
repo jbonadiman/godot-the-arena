@@ -24,18 +24,18 @@ func update_progress() -> void:
 	var current_quantity: int = MetaProgression.get_upgrade_count(upgrade.id)
 	count_label.text = "x%d" % current_quantity
 
+	var percent: float = MetaProgression.currency / upgrade.experience_cost
+	percent = min(percent, 1)
+	progress_bar.value = percent
+	progress_label.text = \
+	"%0.0f/%d" % [MetaProgression.currency, upgrade.experience_cost]
+
 	if current_quantity >= upgrade.max_quantity:
 		purchase_button.disabled = true
 		purchase_button.text = "MAX"
 		return
 
-	var percent: float = MetaProgression.currency / upgrade.experience_cost
-	percent = min(percent, 1)
-
-	progress_bar.value = percent
 	purchase_button.disabled = percent < 1
-	progress_label.text = \
-		"%0.0f/%d" % [MetaProgression.currency, upgrade.experience_cost]
 
 
 

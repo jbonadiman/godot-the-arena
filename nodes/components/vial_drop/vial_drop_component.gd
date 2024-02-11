@@ -1,7 +1,7 @@
 extends Node
 class_name VialDropComponent
 
-@export_range(0, 1) var drop_percent: float = .5
+@export_range(0, 1) var drop_percent: float = 0.5
 @export var health_component: HealthComponent
 @export var vial_scene: PackedScene
 
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _on_died() -> void:
 	var adjusted_drop_percent := drop_percent
-	var experience_gain_count := MetaProgression.get_upgrade_count("experience_gain")
+	var experience_gain_count: int = MetaProgression.get_upgrade_count("experience_gain")
 
 	if experience_gain_count:
 		adjusted_drop_percent += 0.1 * experience_gain_count
