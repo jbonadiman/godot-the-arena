@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://btxg7l3cjueyx"]
+[gd_scene load_steps=6 format=3 uid="uid://btxg7l3cjueyx"]
 
 [ext_resource type="Script" path="res://nodes/ui/meta_menu.gd" id="1_1okiu"]
 [ext_resource type="TileSet" uid="uid://b10bttjgbkobf" path="res://resources/tile_set.tres" id="2_iyanu"]
 [ext_resource type="Resource" uid="uid://xbhb6sm5ij5s" path="res://resources/meta_upgrades/experience_gain.tres" id="2_uu7u7"]
+[ext_resource type="PackedScene" uid="uid://qmoxgvv3ryh5" path="res://nodes/ui/sound_button.tscn" id="3_r65xw"]
 [ext_resource type="PackedScene" uid="uid://c4vw441qj8su5" path="res://nodes/ui/vignette.tscn" id="4_iixqn"]
 
 [node name="MetaMenu" type="CanvasLayer"]
@@ -50,7 +51,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="BackButton" type="Button" parent="MarginContainer"]
+[node name="BackButton" parent="MarginContainer" instance=ExtResource("3_r65xw")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
