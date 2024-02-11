@@ -48,6 +48,7 @@ func set_bus_volume_percentage(bus_name: String, percentage: float) -> void:
 func _on_window_mode_button_pressed() -> void:
 	match DisplayServer.window_get_mode():
 		FULLSCREEN:
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 			DisplayServer.window_set_mode(WINDOW)
 
 		_:

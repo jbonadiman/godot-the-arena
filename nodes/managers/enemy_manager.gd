@@ -1,5 +1,5 @@
-extends Node
 class_name EnemyManager
+extends Node
 
 @export var basic_enemy_scene: PackedScene
 @export var wizard_enemy_scene: PackedScene
@@ -42,9 +42,11 @@ func get_spawn_position() -> Vector2:
 		spawn_position = player.global_position + \
 			(random_direction * spawn_radius)
 
+		var additional_check_offset := random_direction * 20
+
 		var query_params = PhysicsRayQueryParameters2D.create(
 			player.global_position,
-			spawn_position,
+			spawn_position + additional_check_offset,
 			1)
 
 		var raycast_result := get_tree() \
