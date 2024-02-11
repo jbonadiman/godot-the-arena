@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ofb7swnipc7i"]
+[gd_scene load_steps=19 format=3 uid="uid://ofb7swnipc7i"]
 
 [ext_resource type="Script" path="res://nodes/ui/meta_upgrade_card.gd" id="1_c3ldn"]
 [ext_resource type="PackedScene" uid="uid://cc3tq35haypmx" path="res://nodes/components/random_stream_player/random_stream_player_component.tscn" id="2_fq6c7"]
@@ -76,10 +76,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.174533, 0.0, 0.0872665]
+"values": [0.0, -0.174533, 0.0, 0.0872665, 0.0]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -102,58 +102,6 @@ _data = {
 "selected": SubResource("Animation_0xq15")
 }
 
-[sub_resource type="Animation" id="Animation_8tpcg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_83gla"]
-resource_name = "hover"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.0872665, 0.0872665, 0.0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HoverPlayerComponent")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_random"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pys3s"]
-_data = {
-"RESET": SubResource("Animation_8tpcg"),
-"hover": SubResource("Animation_83gla")
-}
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmp4w"]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
@@ -168,16 +116,12 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 atlas = ExtResource("13_wevg7")
 region = Rect2(136, 170, 16, 16)
 
-[node name="MetaUpgradeCard" type="PanelContainer" groups=["upgrade_card"]]
+[node name="MetaUpgradeCard" type="PanelContainer" groups=["meta_upgrade_card"]]
 process_mode = 3
 custom_minimum_size = Vector2(170, 0)
 pivot_offset = Vector2(75, 75)
 mouse_default_cursor_shape = 2
 script = ExtResource("1_c3ldn")
-
-[node name="HoverPlayerComponent" parent="." instance=ExtResource("2_fq6c7")]
-volume_db = -20.0
-streams = Array[AudioStream]([ExtResource("3_478ep"), ExtResource("4_nfpby"), ExtResource("5_u0wx6"), ExtResource("6_abiyb"), ExtResource("7_fnc06"), ExtResource("8_uj5wf"), ExtResource("9_dhnun"), ExtResource("10_cmusk"), ExtResource("11_u6fc7"), ExtResource("12_pkjj3")])
 
 [node name="PressPlayerComponent" parent="." instance=ExtResource("2_fq6c7")]
 streams = Array[AudioStream]([ExtResource("3_478ep"), ExtResource("4_nfpby"), ExtResource("5_u0wx6"), ExtResource("6_abiyb"), ExtResource("7_fnc06"), ExtResource("8_uj5wf"), ExtResource("9_dhnun"), ExtResource("10_cmusk"), ExtResource("11_u6fc7"), ExtResource("12_pkjj3")])
@@ -186,12 +130,6 @@ streams = Array[AudioStream]([ExtResource("3_478ep"), ExtResource("4_nfpby"), Ex
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_24hr6")
-}
-
-[node name="HoverAnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_pys3s")
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -236,7 +174,8 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"BlueOutlineLabel"
@@ -248,6 +187,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_dmp4w")
 max_value = 1.0
