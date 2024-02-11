@@ -7,6 +7,17 @@ var save_data: Dictionary = {
 	"meta_upgrades": {}
 }
 
+var currency: float : set = _set_currency, get = _get_currency
+
+
+func _set_currency(value: float) -> void:
+	save_data["meta_upgrade_currency"] = value
+	save()
+
+
+func _get_currency() -> float:
+	return save_data["meta_upgrade_currency"]
+
 
 func _ready() -> void:
 	GameEvents.experience_vial_collected.connect(_on_experience_collected)
@@ -28,6 +39,13 @@ func save() -> void:
 	file.close()
 
 
+func get_upgrade_count(upgrade_id: String) -> int:
+	if not save_data["meta_upgrades"].has(upgrade_id):
+		return 0
+
+	return save_data["meta_upgrades"][upgrade_id]["quantity"]
+
+
 func add_meta_upgrade(upgrade: MetaUpgrade) -> void:
 	if not save_data["meta_upgrades"].has(upgrade.id):
 		save_data["meta_upgrades"][upgrade.id] = {
@@ -39,5 +57,4 @@ func add_meta_upgrade(upgrade: MetaUpgrade) -> void:
 
 
 func _on_experience_collected(number: float) -> void:
-	save_data["meta_upgrade_currency"] += number
-	save()
+	currency += number

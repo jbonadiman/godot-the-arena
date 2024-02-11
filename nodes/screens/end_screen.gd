@@ -4,14 +4,14 @@ extends CanvasLayer
 @onready var panel_container: PanelContainer = %PanelContainer
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %DescriptionLabel
-@onready var restart_button: SoundButton = %RestartButton
+@onready var continue_button: SoundButton = %ContinueButton
 @onready var quit_button: SoundButton = %QuitButton
 
 
 func _ready() -> void:
 	MetaProgression.save()
 
-	restart_button.pressed.connect(_on_restart_button_pressed)
+	continue_button.pressed.connect(_on_continue_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
 	panel_container.pivot_offset = panel_container.size / 2
@@ -37,13 +37,13 @@ func set_defeat() -> void:
 	play_jingle(true)
 
 
-func _on_restart_button_pressed() -> void:
-	ScreenTransition.transition()
-	await ScreenTransition.transitioned_halfway
-
+func _on_continue_button_pressed() -> void:
+	Screens.transition_to_scene(Screens.upgrades_menu_scene)
+	await Screens.transitioned_halfway
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://nodes/screens/main.tscn")
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().quit()
+	Screens.transition_to_scene(Screens.main_menu_scene)
+	await Screens.transitioned_halfway
+	get_tree().paused = false

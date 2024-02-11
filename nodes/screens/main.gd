@@ -1,11 +1,7 @@
 extends Node
 class_name Main
 
-@export var end_screen_scene: PackedScene
-
 @onready var player: Player = %Player
-
-var pause_menu_scene := preload("res://nodes/ui/pause_menu.tscn")
 
 
 func _ready() -> void:
@@ -16,11 +12,11 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		add_child(pause_menu_scene.instantiate())
+		add_child(Screens.pause_menu_scene.instantiate())
 		get_tree().root.set_input_as_handled()
 
 
 func _on_player_died() -> void:
-	var end_screen_instance := end_screen_scene.instantiate() as EndScreen
+	var end_screen_instance := Screens.end_screen_scene.instantiate() as EndScreen
 	add_child(end_screen_instance)
 	end_screen_instance.set_defeat()

@@ -9,14 +9,20 @@ var entities_layer: Node2D
 
 
 func _ready() -> void:
-	health_component.died.connect(on_died)
+	health_component.died.connect(_on_died)
 
 	entities_layer = get_tree() \
 		.get_first_node_in_group("entities_layer") as Node2D
 
 
-func on_died() -> void:
-	if randf() > drop_percent:
+func _on_died() -> void:
+	var adjusted_drop_percent := drop_percent
+	var experience_gain_count := MetaProgression.get_upgrade_count("experience_gain")
+
+	if experience_gain_count:
+		adjusted_drop_percent += 0.1 * experience_gain_count
+
+	if randf() > adjusted_drop_percent:
 		return
 
 	var parent := owner as Node2D

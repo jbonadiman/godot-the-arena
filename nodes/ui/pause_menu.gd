@@ -8,7 +8,6 @@ extends CanvasLayer
 @onready var options_button: SoundButton = %OptionsButton
 @onready var quit_button: SoundButton = %QuitButton
 
-var options_menu_scene := preload("res://nodes/ui/options_menu.tscn")
 var is_closing := false
 
 
@@ -59,10 +58,10 @@ func _on_resume_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	ScreenTransition.transition()
-	await ScreenTransition.transitioned_halfway
+	Screens.transition()
+	await Screens.transitioned_halfway
 
-	var instance := options_menu_scene.instantiate() as OptionsMenu
+	var instance := Screens.options_menu_scene.instantiate() as OptionsMenu
 
 	add_child(instance)
 	instance.back_pressed.connect(_on_options_back_pressed.bind(instance))
@@ -73,8 +72,5 @@ func _on_options_back_pressed(options_menu: OptionsMenu) -> void:
 
 
 func _on_quit_pressed() -> void:
-	ScreenTransition.transition()
-	await ScreenTransition.transitioned_halfway
-
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://nodes/ui/main_menu.tscn")
+	Screens.transition_to_scene(Screens.main_menu_scene)
