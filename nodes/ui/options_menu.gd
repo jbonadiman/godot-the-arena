@@ -62,7 +62,7 @@ func _on_audio_slider_changed(value: float, bus_name: String) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	Screens.transition()
-	await Screens.transitioned_halfway
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
 
 	back_pressed.emit()

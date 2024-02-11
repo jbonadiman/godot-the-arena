@@ -58,10 +58,10 @@ func _on_resume_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	Screens.transition()
-	await Screens.transitioned_halfway
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
 
-	var instance := Screens.options_menu_scene.instantiate() as OptionsMenu
+	var instance := Scenes.options_menu.instantiate() as OptionsMenu
 
 	add_child(instance)
 	instance.back_pressed.connect(_on_options_back_pressed.bind(instance))
@@ -73,4 +73,4 @@ func _on_options_back_pressed(options_menu: OptionsMenu) -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
-	Screens.transition_to_scene(Screens.main_menu_scene)
+	ScreenTransition.transition_to_scene(Scenes.main_menu)

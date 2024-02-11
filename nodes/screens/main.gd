@@ -12,11 +12,11 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		add_child(Screens.pause_menu_scene.instantiate())
+		add_child(Scenes.pause_menu.instantiate())
 		get_tree().root.set_input_as_handled()
 
 
 func _on_player_died() -> void:
-	var end_screen_instance := Screens.end_scene.instantiate() as EndScreen
+	var end_screen_instance := Scenes.end_screen.instantiate() as EndScreen
 	add_child(end_screen_instance)
 	end_screen_instance.set_defeat()

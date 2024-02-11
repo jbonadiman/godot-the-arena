@@ -1,8 +1,6 @@
 class_name AxeAbilityController
 extends Node
 
-@export var axe_ability_scene: PackedScene
-
 @onready var timer: Timer = $Timer
 
 var base_damage := 10
@@ -26,7 +24,7 @@ func _on_timer_timeout() -> void:
 		push_error("player not found")
 		return
 
-	var instance := axe_ability_scene.instantiate() as AxeAbility
+	var instance := Scenes.axe_ability.instantiate() as AxeAbility
 	foreground_layer.add_child(instance)
 	instance.global_position = player.global_position
 	instance.hitbox_component.damage = base_damage * additional_damage_percent

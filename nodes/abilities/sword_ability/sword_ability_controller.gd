@@ -2,7 +2,6 @@ extends Node
 class_name SwordAbilityController
 
 @export var max_range := 150.0
-@export var sword_ability_scene: PackedScene
 @export var base_damage := 5
 
 @onready var timer: Timer = $Timer
@@ -46,7 +45,7 @@ func on_timer_timeout() -> void:
 
 	var closest_enemy: Node2D = enemies.front()
 
-	var sword_instance := sword_ability_scene.instantiate() as SwordAbility
+	var sword_instance := Scenes.sword_ability.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)
 	sword_instance.hitbox_component.damage = \
 		base_damage * additional_damage_percent
@@ -77,6 +76,3 @@ func _on_ability_upgrade_added(
 			additional_damage_percent = \
 				1 + current_upgrades["sword_damage"]["quantity"] * 0.15
 			print("sword add damage: %.2f" % additional_damage_percent)
-
-
-

@@ -6,10 +6,6 @@ extends Node
 
 @onready var timer: Timer = $Timer
 
-var basic_enemy_scene := preload("res://nodes/game_objects/basic_enemy/basic_enemy.tscn")
-var wizard_enemy_scene := preload("res://nodes/game_objects/wizard_enemy/wizard_enemy.tscn")
-var bat_enemy_scene := preload("res://nodes/game_objects/bat_enemy/bat_enemy.tscn")
-
 var base_spawn_time := 0.0
 var spawn_radius: int
 var entities_layer: Node2D
@@ -19,7 +15,7 @@ var enemy_table := WeightedTable.new()
 func _ready() -> void:
 	base_spawn_time = timer.wait_time
 
-	enemy_table.add_item(basic_enemy_scene, 10)
+	enemy_table.add_item(Scenes.basic_enemy, 10)
 
 	#TODO: This needs better care. The arena needs a minimum size for this to
 	# work
@@ -83,6 +79,6 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 
 	match arena_difficulty:
 		6:
-			enemy_table.add_item(wizard_enemy_scene, 15)
+			enemy_table.add_item(Scenes.wizard_enemy, 15)
 		18:
-			enemy_table.add_item(bat_enemy_scene, 8)
+			enemy_table.add_item(Scenes.bat_enemy, 8)

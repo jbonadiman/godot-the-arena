@@ -26,8 +26,9 @@ config/windows_native_icon="res://icon.ico"
 
 GameEvents="*res://nodes/autoload/game_events.tscn"
 MusicPlayer="*res://nodes/autoload/music_player.tscn"
-Screens="*res://nodes/autoload/screens.tscn"
+ScreenTransition="*res://nodes/autoload/screen_transition.tscn"
 MetaProgression="*res://nodes/autoload/meta_progression.tscn"
+Scenes="*res://nodes/autoload/scenes.gd"
 
 [display]
 

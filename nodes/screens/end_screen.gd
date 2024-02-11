@@ -38,8 +38,8 @@ func set_defeat() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	Screens.transition_to_scene(Screens.upgrades_menu_scene)
+	ScreenTransition.transition_to_scene(Scenes.meta_upgrades_menu)
 
 
 func _on_quit_button_pressed() -> void:
-	Screens.transition_to_scene(Screens.main_menu_scene)
+	ScreenTransition.transition_to_scene(Scenes.main_menu)

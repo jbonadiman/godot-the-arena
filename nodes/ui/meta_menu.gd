@@ -7,17 +7,16 @@ extends CanvasLayer
 @onready var back_button: Button = %BackButton
 
 
-
 func _ready():
 	back_button.pressed.connect(_on_back_button_pressed)
 
 	for upgrade in upgrades:
 		var card := \
-			Screens.meta_upgrade_card_scene.instantiate() as MetaUpgradeCard
+			Scenes.meta_upgrade_card.instantiate() as MetaUpgradeCard
 		grid_container.add_child(card)
 
 		card.upgrade = upgrade
 
 
 func _on_back_button_pressed():
-	Screens.transition_to_scene(Screens.main_menu_scene)
+	ScreenTransition.transition_to_scene(Scenes.main_menu)
