@@ -8,6 +8,7 @@ extends PanelContainer
 @onready var purchase_button: Button = %PurchaseButton
 @onready var progress_label: Label = %ProgressLabel
 @onready var count_label: Label = %CountLabel
+@onready var progress_container: VBoxContainer = %ProgressContainer
 
 var upgrade: MetaUpgrade : set = _set_meta_upgrade
 
@@ -33,6 +34,7 @@ func update_progress() -> void:
 	if current_quantity >= upgrade.max_quantity:
 		purchase_button.disabled = true
 		purchase_button.text = "MAX"
+		progress_container.visible = false
 		return
 
 	purchase_button.disabled = percent < 1
