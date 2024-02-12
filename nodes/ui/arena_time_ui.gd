@@ -1,18 +1,11 @@
 extends CanvasLayer
 class_name ArenaTimeUI
 
-@export var arena_time_manager: ArenaTimeManager
-
 @onready var label = %Label
 
 
 func _process(_delta: float) -> void:
-	if not arena_time_manager:
-		push_error("arena_time_manager not found")
-		return
-
-	var time_elapsed = arena_time_manager.get_time_elapsed()
-	label.text = format_seconds(time_elapsed)
+	label.text = format_seconds(GameTimers.elapsed_time)
 
 
 func format_seconds(seconds: float) -> String:

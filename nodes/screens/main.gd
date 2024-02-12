@@ -6,7 +6,7 @@ class_name Main
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color("763b36"))
-
+	GameTimers.start()
 	player.health_component.died.connect(_on_player_died)
 
 

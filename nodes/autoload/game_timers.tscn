@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8luetpb17r2a"]
+
+[ext_resource type="Script" path="res://nodes/autoload/game_timers.gd" id="1_7dne4"]
+
+[node name="GameTimers" type="Node"]
+script = ExtResource("1_7dne4")
+
+[node name="EnemyDifficultyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+
+[node name="HealthRegenTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 30.0
+
+[node name="EndGameTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 300.0
+one_shot = true

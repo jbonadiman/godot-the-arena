@@ -108,6 +108,7 @@ autoplay = "walk"
 [node name="HealthComponent" parent="." instance=ExtResource("2_xwfma")]
 unique_name_in_owner = true
 position = Vector2(0, 9)
+show_by_default = false
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_k7q1y")]
 health_component = NodePath("../HealthComponent")

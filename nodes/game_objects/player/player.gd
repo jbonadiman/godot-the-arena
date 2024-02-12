@@ -17,7 +17,7 @@ var base_speed := 0.0
 
 func _ready() -> void:
 	base_speed = velocity_component.max_speed
-
+	GameEvents.health_regen_tick.connect(_on_health_regen)
 	GameEvents.ability_upgrades_added.connect(_on_ability_upgrade_added)
 	damage_interval_timer.timeout.connect(_on_damage_interval_timer_timeout)
 	collision_area_2d.body_entered.connect(_on_body_entered)
@@ -90,3 +90,9 @@ func _on_ability_upgrade_added(
 			velocity_component.max_speed = base_speed + \
 				(base_speed * current_upgrades["player_speed"]["quantity"] * 0.1)
 			print("player new max speed: %.2f" % velocity_component.max_speed)
+
+
+func _on_health_regen() -> void:
+	var heal_amount: int = MetaProgression.get_upgrade_count("health_regeneration")
+	if heal_amount:
+		health_component.heal(heal_amount)

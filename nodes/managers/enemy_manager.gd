@@ -1,7 +1,6 @@
 class_name EnemyManager
 extends Node
 
-@export var arena_time_manager: ArenaTimeManager
 @export var debug_draw: DebugDraw
 
 @onready var timer: Timer = $Timer
@@ -13,6 +12,9 @@ var enemy_table := WeightedTable.new()
 
 
 func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
+	GameEvents.arena_difficulty_increased.connect(_on_arena_difficulty_increased)
+
 	base_spawn_time = timer.wait_time
 
 	enemy_table.add_item(Scenes.basic_enemy, 10)

@@ -5,6 +5,8 @@ extends Node2D
 
 signal died
 signal changed
+signal decreased
+signal increased
 
 @export var max_health: float = 10
 @export var show_by_default := false
@@ -12,7 +14,7 @@ signal changed
 
 @onready var progress_bar: StyledProgressBar = %ProgressBar
 
-var current_health
+var current_health: float : set = _set_health
 
 
 func _ready() -> void:
@@ -32,13 +34,26 @@ func _process(_delta: float) -> void:
 			progress_bar.bar_color = health_bar_color
 
 
-func damage(amount: float) -> void:
+func _set_health(value: float) -> void:
+	current_health = clampf(value, 0, max_health)
+
 	progress_bar.visible = true
-	current_health = max(current_health - amount, 0)
+	if current_health == max_health:
+		progress_bar.visible = show_by_default
 	changed.emit()
 
+
+func heal(amount: float) -> void:
+	current_health += amount
+	increased.emit()
+
+
+func damage(amount: float) -> void:
+	current_health -= amount
+	decreased.emit()
+
 	if current_health == 0:
-		Callable(die).call_deferred()
+		die.call_deferred()
 
 
 func _update_display() -> void:
