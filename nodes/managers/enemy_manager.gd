@@ -9,6 +9,7 @@ var base_spawn_time := 0.0
 var spawn_radius: int
 var entities_layer: Node2D
 var enemy_table := WeightedTable.new()
+var spawn_count := 1
 
 
 func _ready() -> void:
@@ -34,15 +35,15 @@ func _on_timer_timeout() -> void:
 
 	var enemy_scene = enemy_table.pick_item()
 
-	var instance: Node2D = enemy_scene.instantiate()# as BasicEnemy
-	entities_layer.add_child(instance)
-	instance.global_position = Spawner.get_position_inside_arena(spawn_radius)
+	for i in spawn_count:
+		var instance := enemy_scene.instantiate() as Node2D
+		entities_layer.add_child(instance)
+		instance.global_position = Spawner.get_position_inside_arena(spawn_radius)
 
 
 func _on_arena_difficulty_increased(arena_difficulty: int):
 	var time_off := (0.1 / 12) * arena_difficulty
 	time_off = min(time_off, 0.7)
-	print("enemy spawn decreased by: %.2fs" % time_off)
 	timer.wait_time = base_spawn_time - time_off
 
 	match arena_difficulty:
@@ -50,3 +51,6 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 			enemy_table.add_item(Scenes.wizard_enemy, 15)
 		18:
 			enemy_table.add_item(Scenes.bat_enemy, 8)
+
+	if arena_difficulty % 6 == 0:
+		spawn_count += 1
