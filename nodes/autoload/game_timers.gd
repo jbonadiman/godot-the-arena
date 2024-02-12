@@ -4,7 +4,7 @@ extends Node
 @onready var health_regen_timer: Timer = %HealthRegenTimer
 @onready var end_game_timer: Timer = %EndGameTimer
 
-var arena_difficulty := 0
+var arena_difficulty: int
 var elapsed_time: float : get = _get_elapsed_time
 
 
@@ -22,6 +22,7 @@ func start() -> void:
 	enemy_difficulty_time.start()
 	health_regen_timer.start()
 	end_game_timer.start()
+	arena_difficulty = 0
 
 
 func _on_end_game_timeout() -> void:
