@@ -1,12 +1,12 @@
 extends Node
 class_name SwordAbilityController
 
-@export var max_range := 150.0
-@export var base_damage := 5
 
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = %Timer
 @onready var base_wait_time := timer.wait_time
 
+const BASE_DAMAGE := 5
+const MAX_RANGE := 60.0
 const UPGRADE_PERCENTAGE := 0.1
 
 var additional_damage_percent := 1.0
@@ -30,7 +30,7 @@ func on_timer_timeout() -> void:
 	enemies = enemies.filter(
 		func(enemy: Node2D):
 			return enemy.global_position \
-			.distance_squared_to(player.global_position) <= pow(max_range, 2))
+			.distance_squared_to(player.global_position) <= pow(MAX_RANGE, 2))
 
 	if enemies.is_empty():
 		return
@@ -48,7 +48,7 @@ func on_timer_timeout() -> void:
 	var sword_instance := Scenes.sword_ability.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)
 	sword_instance.hitbox_component.damage = \
-		base_damage * additional_damage_percent
+		BASE_DAMAGE * additional_damage_percent
 
 	sword_instance.global_position = \
 		closest_enemy.global_position \

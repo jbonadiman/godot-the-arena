@@ -71,7 +71,7 @@ func pick_upgrades() -> Array[Upgrade]:
 	return chosen_upgrades
 
 
-func on_upgrade_selected(upgrade: Upgrade) -> void:
+func _on_upgrade_selected(upgrade: Upgrade) -> void:
 	apply_upgrade(upgrade)
 
 
@@ -82,4 +82,4 @@ func _on_level_up(_new_level: int):
 
 	var chosen_upgrades := pick_upgrades()
 	upgrade_screen_instance.set_ability_upgrades(chosen_upgrades)
-	upgrade_screen_instance.upgrade_selected.connect(on_upgrade_selected)
+	upgrade_screen_instance.upgrade_selected.connect(_on_upgrade_selected)
