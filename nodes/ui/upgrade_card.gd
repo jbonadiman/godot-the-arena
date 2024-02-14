@@ -1,7 +1,7 @@
 class_name AbilityUpgradeCard
 extends PanelContainer
 
-signal selected
+signal submitted
 
 @onready var name_label: Label = %NameLabel
 @onready var description_label: Label = %DescriptionLabel
@@ -9,11 +9,13 @@ signal selected
 @onready var hover_animation_player: AnimationPlayer = %HoverAnimationPlayer
 
 var disabled := false
+var hovered := false
 
 
 func _ready() -> void:
 	gui_input.connect(_on_gui_input)
 	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 
 func play_in(delay_sec := 0.0) -> void:
@@ -26,9 +28,25 @@ func play_discard() -> void:
 	animation_player.play("discard")
 
 
-func _select_card() -> void:
-	disabled = true
+func hover() -> void:
+	if disabled:
+		return
+
+	hovered = true
+	hover_animation_player.play("hover")
 	animation_player.play("selected")
+
+
+func unhover() -> void:
+	if disabled:
+		return
+	animation_player.play("RESET")
+	hovered = false
+
+
+func submit() -> void:
+	disabled = true
+	animation_player.play("submitted")
 
 	var upgrade_cards := get_tree().get_nodes_in_group("upgrade_card")
 
@@ -38,7 +56,7 @@ func _select_card() -> void:
 		other_card.play_discard()
 
 	await animation_player.animation_finished
-	selected.emit()
+	submitted.emit()
 
 
 func set_ability_upgrade(upgrade: Upgrade) -> void:
@@ -51,11 +69,12 @@ func _on_gui_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("left_click"):
-		_select_card()
+		submit()
 
 
 func _on_mouse_entered() -> void:
-	if disabled:
-		return
+	hover()
 
-	hover_animation_player.play("hover")
+
+func _on_mouse_exited() -> void:
+	unhover()
