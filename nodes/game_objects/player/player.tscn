@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://dcsfwqpi0ufvk" path="res://nodes/components/velocity/velocity_component.tscn" id="2_achqi"]
-[ext_resource type="PackedScene" uid="uid://7y7cdw6rv488" path="res://nodes/abilities/spear_ability/spear_ability_controller.tscn" id="4_n5n0n"]
+[ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
 [ext_resource type="PackedScene" uid="uid://ba4l57nbeg4w8" path="res://nodes/components/random_stream_player/random_stream_player_2d_component.tscn" id="5_5xkw2"]
 [ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health/health_component.tscn" id="5_25fjk"]
 [ext_resource type="AudioStream" uid="uid://dbrji1xgpbokr" path="res://assets/audio/impactMining_000.ogg" id="6_l20v6"]
@@ -154,7 +154,7 @@ health_bar_color = Color(0.145098, 0.584314, 0.415686, 1)
 [node name="Abilities" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="SpearAbilityController" parent="Abilities" instance=ExtResource("4_n5n0n")]
+[node name="SwordAbilityController" parent="Abilities" instance=ExtResource("2_x18iw")]
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 unique_name_in_owner = true
