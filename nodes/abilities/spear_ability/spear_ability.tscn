@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuj0qwhnr5nb4"]
+
+[ext_resource type="Script" path="res://nodes/abilities/spear_ability/spear_ability.gd" id="1_jcrv1"]
+[ext_resource type="PackedScene" uid="uid://dp7qx020xn5v" path="res://nodes/components/hit_box/hit_box_component.tscn" id="2_5go7i"]
+[ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="3_6v4mv"]
+
+[sub_resource type="Animation" id="Animation_wfsfr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBoxComponent/CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0q1ea"]
+resource_name = "thrust"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(3.13833, 0.574349, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 9.84915, 9.84914),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-12, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBoxComponent/CollisionPolygon2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1gfc"]
+_data = {
+"RESET": SubResource("Animation_wfsfr"),
+"thrust": SubResource("Animation_0q1ea")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk5xy"]
+atlas = ExtResource("3_6v4mv")
+region = Rect2(187, 170, 16, 16)
+
+[node name="SpearAbility" type="Node2D"]
+script = ExtResource("1_jcrv1")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("2_5go7i")]
+unique_name_in_owner = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBoxComponent"]
+position = Vector2(-15, 2)
+rotation = -1.5708
+polygon = PackedVector2Array(-14, -17, 18, -17, 5, 12, -1, 12)
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g1gfc")
+}
+autoplay = "thrust"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = SubResource("AtlasTexture_xk5xy")
+offset = Vector2(0, -4)

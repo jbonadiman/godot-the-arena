@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://7y7cdw6rv488"]
+
+[ext_resource type="Script" path="res://nodes/abilities/spear_ability/spear_ability_controller.gd" id="1_41t0w"]
+
+[node name="SpearAbilityController" type="Node"]
+script = ExtResource("1_41t0w")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true

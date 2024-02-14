@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bubpxinyfuupy"]
+[gd_scene load_steps=20 format=3 uid="uid://bubpxinyfuupy"]
 
 [ext_resource type="Script" path="res://nodes/game_objects/player/player.gd" id="1_vmup1"]
 [ext_resource type="Texture2D" uid="uid://c4my8mw3qap6f" path="res://assets/tiny-dungeon-tilemap.png" id="1_ybm0y"]
 [ext_resource type="PackedScene" uid="uid://dcsfwqpi0ufvk" path="res://nodes/components/velocity/velocity_component.tscn" id="2_achqi"]
-[ext_resource type="PackedScene" uid="uid://7gdwlpdaftd7" path="res://nodes/abilities/sword_ability/sword_ability_controller.tscn" id="2_x18iw"]
+[ext_resource type="PackedScene" uid="uid://7y7cdw6rv488" path="res://nodes/abilities/spear_ability/spear_ability_controller.tscn" id="4_n5n0n"]
 [ext_resource type="PackedScene" uid="uid://ba4l57nbeg4w8" path="res://nodes/components/random_stream_player/random_stream_player_2d_component.tscn" id="5_5xkw2"]
 [ext_resource type="PackedScene" uid="uid://dx0w2h1357hut" path="res://nodes/components/health/health_component.tscn" id="5_25fjk"]
 [ext_resource type="AudioStream" uid="uid://dbrji1xgpbokr" path="res://assets/audio/impactMining_000.ogg" id="6_l20v6"]
@@ -92,9 +92,28 @@ tracks/2/keys = {
 "values": [Vector2(1, 1), Vector2(0.8, 1.1), Vector2(1.5, 0.7), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_uve70"]
+resource_name = "new_walk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.261799, 0.261799, -0.261799]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tm7a6"]
 _data = {
 "RESET": SubResource("Animation_epagx"),
+"new_walk": SubResource("Animation_uve70"),
 "walk": SubResource("Animation_3m7jq")
 }
 
@@ -135,7 +154,7 @@ health_bar_color = Color(0.145098, 0.584314, 0.415686, 1)
 [node name="Abilities" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="SwordAbilityController" parent="Abilities" instance=ExtResource("2_x18iw")]
+[node name="SpearAbilityController" parent="Abilities" instance=ExtResource("4_n5n0n")]
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 unique_name_in_owner = true

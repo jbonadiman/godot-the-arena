@@ -26,24 +26,30 @@ func on_timer_timeout() -> void:
 		push_error("player not found")
 		return
 
-	var enemies := get_tree().get_nodes_in_group("enemy") as Array
-	enemies = enemies.filter(
-		func(enemy: Node2D):
-			return enemy.global_position \
-			.distance_squared_to(player.global_position) <= pow(MAX_RANGE, 2))
+	var closest_enemy := \
+		Spawner.get_enemy_closest_to(player, pow(MAX_RANGE, 2))
 
-	if enemies.is_empty():
+	if not closest_enemy:
 		return
 
-	enemies.sort_custom(
-		func(this: Node2D, other: Node2D):
-			var this_distance = \
-				this.global_position.distance_squared_to(player.global_position)
-			var other_distance = \
-				other.global_position.distance_squared_to(player.global_position)
-			return this_distance < other_distance)
-
-	var closest_enemy: Node2D = enemies.front()
+	#var enemies := get_tree().get_nodes_in_group("enemy") as Array
+	#enemies = enemies.filter(
+		#func(enemy: Node2D):
+			#return enemy.global_position \
+			#.distance_squared_to(player.global_position) <= pow(MAX_RANGE, 2))
+#
+	#if enemies.is_empty():
+		#return
+#
+	#enemies.sort_custom(
+		#func(this: Node2D, other: Node2D):
+			#var this_distance = \
+				#this.global_position.distance_squared_to(player.global_position)
+			#var other_distance = \
+				#other.global_position.distance_squared_to(player.global_position)
+			#return this_distance < other_distance)
+#
+	#var closest_enemy: Node2D = enemies.front()
 
 	var sword_instance := Scenes.sword_ability.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)
