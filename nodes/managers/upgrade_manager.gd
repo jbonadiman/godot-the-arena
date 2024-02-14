@@ -8,12 +8,13 @@ var current_upgrades := {}
 var upgrade_pool := WeightedTable.new()
 
 var upgrade_anvil: Upgrade = preload("uid://000hbhxpnjwo")
-var upgrade_axe: Upgrade = preload("res://resources/upgrades/axe.tres")
-var upgrade_axe_damage: Upgrade = preload("res://resources/upgrades/axe_damage.tres")
-var upgrade_sword_rate: Upgrade = preload("res://resources/upgrades/sword_rate.tres")
-var upgrade_sword_damage: Upgrade = preload("res://resources/upgrades/sword_damage.tres")
-var upgrade_player_speed: Upgrade = preload("res://resources/upgrades/player_speed.tres")
-var upgrade_anvil_count: Upgrade = preload("res://resources/upgrades/anvil_count.tres")
+var upgrade_spear: Upgrade = preload("uid://cqshx5r0apsb2")
+var upgrade_axe: Upgrade = preload("uid://fjheqeagwgiq")
+var upgrade_axe_damage: Upgrade = preload("uid://bnko0b1ypw0h0")
+var upgrade_sword_rate: Upgrade = preload("uid://dc7gebb5243ce")
+var upgrade_sword_damage: Upgrade = preload("uid://brobpogkcmmag")
+var upgrade_player_speed: Upgrade = preload("uid://cg3yehb1deya0")
+var upgrade_anvil_count: Upgrade = preload("uid://beqy4i45tq6od")
 
 enum UpgradeRarity {
 	COMMON = 10,
@@ -24,9 +25,11 @@ enum UpgradeRarity {
 
 func _ready() -> void:
 	upgrade_pool.add_item(upgrade_axe, UpgradeRarity.COMMON)
-	upgrade_pool.add_item(upgrade_anvil, UpgradeRarity.COMMON)
+	upgrade_pool.add_item(upgrade_spear, UpgradeRarity.COMMON)
 	upgrade_pool.add_item(upgrade_sword_rate, UpgradeRarity.COMMON)
 	upgrade_pool.add_item(upgrade_sword_damage, UpgradeRarity.COMMON)
+
+	upgrade_pool.add_item(upgrade_anvil, UpgradeRarity.UNCOMMON)
 	upgrade_pool.add_item(upgrade_player_speed, UpgradeRarity.UNCOMMON)
 
 	experience_manager.level_up.connect(_on_level_up)
